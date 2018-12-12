@@ -21,13 +21,13 @@ function Map(){
     "Sccccccccccc.||||c....BSB......,,;,.....BSB....c||||ccccccccccccS" +
     "S------------.+||c.BBBBBBBBBBBBBbbBBBBBBBBBBBB.c||++------------S" +
     "S------------+++|c.BBBBBBBBBBBBbbBBBBBBBBBBBBB..|+++------------S" +
-    "S------------+++|c.BBfffffffffffffffffffffffBB....++------------S" +
-    "S------------++||c.,faaffffffffffbbffbbfffbfBB...|++------------S" +
-    "Scccccccccccc||||c,;fafaffaffafafbfbfbfbfbfbf,,.||||cccc..ccccccS" +
-    "SfffBBBBBBBBc||||c,;fafafafafafafbbffbbffbfbf;,c||||cBBBBBBBBfffS" +
-    "SfffBBBBBBBBc||||c.;fafafaaffafafbfffbfbfbfbf;,c||||cBBBBBBBBfffS" +
-    "SfffffffffBBc||||c.,faafffaaffaffbfffbfbffbff,.c||||cBBfffffffffS" +
-    "SfffffffffBBc||||c.BBfffffffffffffffffffffffBB.c||||cBBfffffffffS" +
+    "S------------+++|c.BBffffBBfff,,,,ffffffffffBB....++------------S" +
+    "S------------++||c.,,ffffBBfff,..,fffffff.f,BB...|++------------S" +
+    "Scccccccccccc||||c,;;,.ffBBff....ffffffff..,,,,.||||cccc..ccccccS" +
+    "SfffBBBBBBBBc||||c,;;,..fffffff...fffff..f.,;;,c||||cBBBBBBBBfffS" +
+    "SfffBBBBBBBBc||||c.;;,ffffffffff.ffBBff....,;;,c||||cBBBBBBBBfffS" +
+    "SfffffffffBBc||||c.,,c.f.ffffffffffBBf...f.,,,.c||||cBBfffffffffS" +
+    "SfffffffffBBc||||c.BB;;,,,fffffffffBBff,,,,fBB.c||||cBBfffffffffS" +
     "SfffffffffBBc||||c.BBB;;;;BBBBBBBBBBBBB;;;;BBB.c||||cBBfffffffffS" +
     "SBBBBBBfffBBc||||c.BBB,,,,BBBBBBBBBBBBB,,,,BBB.c||||cBBfffBBBBBBS" +
     "SBBBBBBfffBBc||||c.............................c||||cBBfffBBBBBBS" +

@@ -7,7 +7,7 @@ var server = require('http').createServer(),
 // Client stuff
 
 var iface = process ? process.env.IFACE : null;
-var port = process ? process.env.PORT : 80;
+var port = 10110;
 if (!port)
    port = 80;
 console.log("Configured address: " + iface + ":" + port);
@@ -16,8 +16,6 @@ app.use(express.static('.'));
 app.get("/", function (request, response) {
     response.sendFile(__dirname + '/index.html');
 });
-
-
 
 var admin = [];
 var teams = []; //array of Team

@@ -221,6 +221,7 @@ Behavior.LifeInBounds = function(minx, miny, maxx, maxy) {
         obj.lifeMaxY = maxy;
     }
 };
+
 Behavior.LifeInBounds.prototype = {
         name: "lifebounds",
         exec: function(obj, delta) {
@@ -239,6 +240,7 @@ Behavior.Custom = function(func) {
         obj.customFunc = func
     }
 };
+
 Behavior.Custom.prototype = {
         name: "custom",
         exec: function(obj, delta) {

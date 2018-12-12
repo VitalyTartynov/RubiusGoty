@@ -5,6 +5,7 @@ function NetworkCooldownInputKeyboardStub(team, property, position) {
     this.position = position;
     this.vacant = true;
 }
+
 NetworkCooldownInputKeyboardStub.prototype = {
     isDown: function(char) {
 
@@ -86,10 +87,6 @@ var Sockets = (function() {
             });
         }
 
-        /*setInterval(function () {
-            Sockets.SendState();
-        }, 5000);
-    */
         _socket.onmessage = function(msg){
             var data = JSON.parse(msg.data);
             console.log('got msg ' + msg.data);
@@ -106,13 +103,8 @@ var Sockets = (function() {
 
     return {
         ViewModel: {
-            teams: [
-
-            ],
+            teams: [],
         },
-        /*SendState: function() {
-            Sockets.sendJson({type: 'gameState', state: Sockets.ViewModel.gameStarted});
-        },*/
         UpdateCallback: null
     };
 })();

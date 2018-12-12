@@ -28,7 +28,7 @@ var Game = {
             SpawnTank: function() {
                 this.Tank = Game.spawnTank(this.spawnX, this.spawnY, this.spawnAngle, this.name, this.networkIndex);
                 Game.RootEntity.addChild(this.Tank);
-            }            
+            }
         };
         if(name == "boss") {
             team.Inputs.ThrottleInput = new KeyboardBiDiInput(App.Keyboard, 'W', 'S');
@@ -225,7 +225,7 @@ var Game = {
                         delete this.speedBonusTime;
                         delete this.RightTrack.imageGlow;
                         delete this.LeftTrack.imageGlow;
-                    }                    
+                    }
                 }
             }
             this.spawn.powerup = null;

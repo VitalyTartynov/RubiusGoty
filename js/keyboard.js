@@ -30,7 +30,7 @@ function KeyboardCooldownInput(kybd, char, cooldown, manualRefire) {
 }
 
 KeyboardCooldownInput.prototype = {
-    read: function(timestamp) {        
+    read: function(timestamp) {
         var elapsed = timestamp - this.lastFired;
 
          // if on cooldown, report progress, negative value from -1 to 0
@@ -63,12 +63,11 @@ function Keyboard() {
 }
 
 Keyboard.prototype = {
-
     isDown: function(char) {
         return this._keysDown[char];
     },
 
-    keyDown: function(e) {        
+    keyDown: function(e) {
         var char = String.fromCharCode(e.keyCode);
         this._keysDown[char] = true;
     },

@@ -8,7 +8,6 @@ function Collider(map, impassableBlocks, rootEntity, impassableObjects){
 }
 
 Collider.prototype.IsCollided = function(rect, sourceObject){
-
     //check map
     if(this.impassableBlocks) {
         var tw = this.map.tileWidth;

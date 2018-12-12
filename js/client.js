@@ -12,7 +12,6 @@ function GoToChooseTeam() {
     GoTo('/chooseteam');
 }
 
-
 function CheckClientNavigationShouldExit(page) {
     if (page == 'login-page') {
         if (localStorage.getItem('username')) {
@@ -27,8 +26,8 @@ function CheckClientNavigationShouldExit(page) {
     }
 
     return false;
-
 }
+
 var Sockets = (function() {
     _socket.onopen = function()
     {
@@ -37,9 +36,6 @@ var Sockets = (function() {
 
     _socket.onmessage = function(msg){
         var data = JSON.parse(msg.data);
-
-
-        //console.log(data);
 
         if (data.type == 'ViewModel') {
             Sockets.ViewModel = data;
@@ -54,15 +50,12 @@ var Sockets = (function() {
 
     return {
         Init: function(name, team, position) {
-
             ClientViewModel.name = name;
             ClientViewModel.team = team;
             ClientViewModel.position = position;
-            //console.log(ClientViewModel);
             _socket.sendJson(ClientViewModel);
         },
         sendJson: function(data) {
-            //console.log(data);
             _socket.sendJson(data);
         },
         Close: function() {

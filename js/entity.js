@@ -1,6 +1,5 @@
 
 var EntityBase = {
-
     addBehavior: function(beh) {
         var name = beh.name;
         beh.init(this);
@@ -50,7 +49,6 @@ var EntityBase = {
     },
 
     update: function(delta) {
-
         // run updates
         for(var behavior in this._behaviors)
             this._behaviors[behavior](this, delta);
@@ -156,6 +154,7 @@ Sprite.prototype = {
         this.image = image;
     }
 };
+
 Balloon.prototype = {
     __proto__: EntityBase,
     draw: function(ctx) {

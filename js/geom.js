@@ -83,7 +83,7 @@ Geom.Rect.prototype.GetMbr = function(){
     if (p.y > ymax) ymax = p.y;
     if (p.y < ymin) ymin = p.y;
 
-    return new Geom.Mbr(xmin, xmax, ymin, ymax);    
+    return new Geom.Mbr(xmin, xmax, ymin, ymax);
 }
 
 Geom.OverlapMbr = function (r1, r2){
@@ -137,7 +137,7 @@ Geom.FindPointsInRect = function(r1, r2) {
     testFunc(p, retval);
     p = (new Geom.Point(-w/2, -h/2)).Rotate(rotrect.angle).Translate(rotrect.x, rotrect.y);
     testFunc(p, retval);
-    return retval;    
+    return retval;
 }
 // var dbg;
 // var printRect = function(r) {
@@ -153,7 +153,3 @@ Geom.Intersect2 = function(rect1, rect2){
     // l("debugText").innerHTML = dbg;
     return arr;
 }
-
-
-
-

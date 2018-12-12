@@ -80,7 +80,7 @@ var App = {
                 ctx.fillRect(-10.5, -10.5, 21, 21);
             } else if (value < 0) {
                 ctx.fillStyle = "#808080";
-                ctx.fillRect(-10.5, 10.5 + 21 * value, 21, -21 * value);                
+                ctx.fillRect(-10.5, 10.5 + 21 * value, 21, -21 * value);
             }
             ctx.globalAlpha = (vacant || value < 0) ? 0.4 : 1;
             if(guiSpec.rot)

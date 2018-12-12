@@ -1,6 +1,5 @@
 
 var Sound = {
-
     // should probably not cache Audio elements per URL, but rather reuse same pool
     // for all required sounds, shouldn't have overhead. but not today.
     Cache: [],
