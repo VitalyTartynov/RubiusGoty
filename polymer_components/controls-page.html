@@ -8,7 +8,6 @@
         </style>
         <div class="section"></div>
         <main>
-
             <center>
                 <div inner-h-t-m-l="{{localize('HiNameYouAreInATeamAndShouldAct', 'name', name, 'team', teamName, 'position', position.title)}}"></div>
                 <br/>
@@ -22,33 +21,17 @@
                                 <img src$="images/{{action.icon}}" style="vertical-align:middle"/>
                             </template>
                             {{action.text}}
-
                         </button>
                     </div>
                 </template>
-
             </center>
             <div class="section"></div>
-
         </main>
         <change-name></change-name>
     </template>
 </dom-module>
 
 <script>
-    // Set the name of the hidden property and the change event for visibility
-    // var hiddenProp, visibilityChange; 
-    // if (typeof document.hidden !== "undefined") { // Opera 12.10 and Firefox 18 and later support 
-    //     hiddenProp = "hidden";
-    //     visibilityChange = "visibilitychange";
-    // } else if (typeof document.msHidden !== "undefined") {
-    //     hiddenProp = "msHidden";
-    //     visibilityChange = "msvisibilitychange";
-    // } else if (typeof document.webkitHidden !== "undefined") {
-    //     hiddenProp = "webkitHidden";
-    //     visibilityChange = "webkitvisibilitychange";
-    // }
-
     var model = {
         type: 'clientState'
     };
@@ -101,12 +84,11 @@
             };
             Sockets.UpdateCallback();
 
-            unfocusListener = function () {
-                // if(document[hiddenProp])
-                    that.actions.forEach(function (act) {
-                        model[act.action] = 0;
-                        Sockets.sendJson(model);
-                    });
+            unfocusListener = function() {
+                that.actions.forEach(function (act) {
+                    model[act.action] = 0;
+                    Sockets.sendJson(model);
+                });
             };
             window.addEventListener('blur', unfocusListener, false);
             pingInterval = setInterval(function () {

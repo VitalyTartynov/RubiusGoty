@@ -2,11 +2,8 @@
 <link rel="import" href="../bower_components/app-localize-behavior/app-localize-behavior.html">
 <dom-module id="choose-team-page">
     <template>
-
-
         <div class="section"></div>
         <main>
-
             <center>
                 <div inner-h-t-m-l="{{localize('HiNameChooseYourTeam', 'name', name)}}"></div>
                 <br/>
@@ -15,12 +12,9 @@
                         <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect' style$="[[_teamStyle(team.id)]]" data-team$="{{team.id}}" on-tap="join">[[_teamName(team.id)]]</button>
                     </div>
                 </template>
-
             </center>
-
             <div class="section"></div>
         </main>
-
         <change-name reset-name="true"></change-name>
     </template>
 </dom-module>
