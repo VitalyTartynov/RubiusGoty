@@ -78,7 +78,6 @@ NetworkBiDiInput.prototype = {
 }
 
 var Sockets = (function() {
-
     if(_socket) {
         _socket.onopen = function()
         {

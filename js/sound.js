@@ -1,4 +1,3 @@
-
 var Sound = {
     // should probably not cache Audio elements per URL, but rather reuse same pool
     // for all required sounds, shouldn't have overhead. but not today.
@@ -9,6 +8,7 @@ var Sound = {
             return url + "(" + id + ")";
         return url;
     },
+
     PutAudio: function(key, audio) {
         var array = this.Cache[key];
         if(!array) {
@@ -17,6 +17,7 @@ var Sound = {
         }
         array.push(audio);
     },
+
     GetIdleAudio: function(key) {
         var array = this.Cache[key];
 
@@ -33,6 +34,7 @@ var Sound = {
         // all cached are playing
         return null;
     },
+
     Load: function(url, onloaded, id, onlyStart) {
         var key = this.GetKey(url, id);
         var audio = new Audio(url);
@@ -42,6 +44,7 @@ var Sound = {
             audio.oncanplaythrough = onloaded;
         this.PutAudio(key, audio);
     },
+    
     Play: function(url, vol, loops, id) {
         var key = this.GetKey(url, id);
         var audio = this.GetIdleAudio(key);

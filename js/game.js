@@ -8,9 +8,6 @@ var Game = {
         this.Teams.push(this.SetupTeam("2", 1, 520, 64, 0, 2300));
         this.Teams.push(this.SetupTeam("3", 2, 1008 - 40, 640, 180, 3200));
         this.Teams.push(this.SetupTeam("boss", -1, 520, 736, 180, 0));
-        //this.Teams.push(this.SetupTeam("boss", -1, 520, 300, 180, 0));
-
-        //this.ScrapeSound = Sound.Play("./sound/metal-scrape.mp3", 0, true);
     },
     SetupTeam: function(name, networkIndex, spawnX, spawnY, spawnAngle, spawnCountdown) {
         if(typeof spawnCountdown == 'undefined')
@@ -387,7 +384,6 @@ var Game = {
     },
     //scrapeDetected: false,
     Logic: function (delta) {
-
         if (this.sparksCooldown < 100) {
             this.sparksCooldown += delta;
             if (this.sparksCooldown > 100)
@@ -395,7 +391,6 @@ var Game = {
         }
 
         this.Teams.forEach(function (team) {
-
             if (team.popKillsTime >= 0)
                 team.popKillsTime += delta;
             if (team.popKills) {
@@ -461,7 +456,7 @@ var Game = {
                     if (tank.Head.angle < -Math.PI / 4) tank.Head.angle += Math.PI / 2;
                 }
             }
-        }, this); 
+        }, this);
 
         Object.keys(this.powerupTimings).forEach(function(key) {
             var spawnTiming = this.powerupTimings[key];
@@ -472,10 +467,7 @@ var Game = {
             }
         }, this);
 
-        //this.scrapeDetected = false;
         this.RootEntity.update(delta);
         this.GuiEntity.update(delta);
-        //this.ScrapeSound.volume = this.scrapeDetected ? 1 : 0;
     },
 }
-

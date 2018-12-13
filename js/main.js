@@ -39,7 +39,6 @@ var App = {
             ctx.drawImage(App.Canvas, tank.x - tank.width, tank.y - tank.width,  tank.width*2, tank.width*2, 2, 1, 60, 60);
         } else {
             var phase = Math.floor( this.elapsedMsec / 50 % 4 );
-            //l("debugText").innerHTML = "phase: " + phase;
             ctx.drawImage(App.Images.noise, phase * 30, 0, 30, 30, 2, 1, 60, 60);
         }
 
@@ -56,7 +55,6 @@ var App = {
     },
     GuiPositions: null, // see EntryPoint
     DrawInputs: function(ctx, team) {
-
         for(var i = 0; i < this.GuiPositions.length; i++) {
             var guiSpec = this.GuiPositions[i];
             if (!(guiSpec.name in team.Inputs))
@@ -92,6 +90,7 @@ var App = {
             ctx.restore();
         }
     },
+
     DrawScore: function(ctx, team) {
         ctx.save();
         ctx.textBaseline = "middle";
@@ -121,6 +120,7 @@ var App = {
         }
         ctx.restore();
     },
+
     DrawHealthCube: function(ctx, team) {
         var tankHp = team.Tank ? team.Tank.hp : 0;
         ctx.textBaseline = "middle";
@@ -133,6 +133,7 @@ var App = {
         ctx.translate(18, 32);
         ctx.fillText(tankHp, 0, 0);
     },
+
     DrawJoinTicker: function(ctx, x, y) {
         ctx.font = "bold 14px Roboto";
         ctx.fillStyle = "#F00";
@@ -150,12 +151,14 @@ var App = {
         ctx.fillText(urlToJoinGame, 0, 0);
         ctx.restore();
     },
+
     EndFrame: function(fps, panic) {
             if (panic) {
                 var discardedTime = Math.round(MainLoop.resetFrameDelta());
                 console.warn('Main loop panicked, probably because the browser tab was put in the background. Discarding ' + discardedTime + 'ms');
             }
     },
+
     assetsLoaded: 0,
     EntryPoint: function() {
 
@@ -243,15 +246,9 @@ var App = {
         Sound.Load("./sound/engine working long.mp3", onloaded, "1");
         Sound.Load("./sound/background.mp3", onloaded, false, true);
     },
+
     FinishEntry: function() {
-
         Game.Setup();
-
-        // Background music: Plug it In
-        //                by AlumoMusic - http://www.alumomusic.com
-        // 
-        // Licensed for use within this project and its derivatives - please don't extract and reuse separately.
-        // Listen for free at http://www.jamendo.com
         Game.Music = Sound.Play("./sound/background.mp3", 60, true);
         App.SetVolumeText(60);
 
@@ -286,8 +283,13 @@ var App = {
         // no address here, it is drawn in DrawJoinTicker
         document.getElementById("hud4message").innerHTML = Res.inviteLine1 + "<br/><br/>" + Res.inviteLine3;
 
-        MainLoop.setBegin(Game.ConsumeInputs).setUpdate(App.UpdateFrame).setDraw(App.DrawFrame).setEnd(App.EndFrame).start();
+        MainLoop.setBegin(Game.ConsumeInputs)
+                .setUpdate(App.UpdateFrame)
+                .setDraw(App.DrawFrame)
+                .setEnd(App.EndFrame)
+                .start();
     },
+    
     SetVolumeText: function(intVolume) {
         var str = intVolume == 0 
             ? Res.volumeOff

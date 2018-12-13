@@ -1,4 +1,3 @@
-
 var EntityBase = {
     addBehavior: function(beh) {
         var name = beh.name;

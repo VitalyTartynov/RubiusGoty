@@ -154,19 +154,24 @@ Map.prototype = {
     tileHeight: 16,
     tileArtWidth: 8,
     tileArtHeight: 8,
+
     getTerrainChar: function(x, y) {
         var index = y*this.width + x;
         return this.terrainArray[index];
     },
+
     setTerrainChar: function(x, y, char) {
         var index = y*this.width + x;
         this.terrainArray[index] = char;
     },
+
     getBuildingChar: function(x, y) {
         var index = y*this.width + x;
         return this.buildingArray[index];
     },
+
     impassableTiles: "BS",
+
     getTile: function(xcell, ycell) {
         var tchar = this.getTerrainChar(xcell, ycell);
         var bchar = this.getBuildingChar(xcell, ycell);
@@ -179,12 +184,15 @@ Map.prototype = {
                 passable: this.impassableTiles.indexOf(tchar) < 0 && bchar == ' ',
             };
     },
+
     getTileAt: function(xpx, ypx) {
         var xcell = Math.floor(xpx / this.tileWidth);
         var ycell = Math.floor(ypx / this.tileHeight);
         return this.getTile(xcell, ycell);
     },
+
     degradation: ".,; Bb",
+
     degradeTile: function(xcell, ycell) {
         if( xcell >= 0 && xcell < this.width && ycell >= 0 && ycell < this.height ) {
             var char = this.getTerrainChar(xcell, ycell);
@@ -193,11 +201,13 @@ Map.prototype = {
                 this.setTerrainChar(xcell, ycell, this.degradation.charAt(idx + 1));
         }
     },
+
     degradeTileAt: function(xpx, ypx) {
         var xcell = Math.floor(xpx / this.tileWidth);
         var ycell = Math.floor(ypx / this.tileHeight);
         this.degradeTile(xcell, ycell);
     },
+
     drawMap: function(ctx, x, y) {
         ctx.save();
         ctx.translate(x, y);
@@ -238,6 +248,7 @@ Map.prototype = {
             }
         ctx.restore();
     },
+
     drawTile: function(ctx, x, y, tileChar) {
         var tileCfg = this.tileDictionary[tileChar];
         var randomOffset = 0;
@@ -248,6 +259,7 @@ Map.prototype = {
         ctx.drawImage(this.tilesImage, (tileCfg.tileX + randomOffset) * this.tileArtWidth, tileCfg.tileY * this.tileArtHeight, this.tileArtWidth, this.tileArtHeight,
             x * this.tileWidth, y * this.tileHeight, this.tileWidth, this.tileHeight);
     },
+    
     powerupPoints: {},
 }
 
