@@ -3,9 +3,9 @@ var ClientViewModel = {
 };
 
 function GoTo(url) {
-    setTimeout(function() {
+    setTimeout(function () {
         document.querySelector('app-router').go(url);
-    },10);
+    }, 10);
 }
 
 function GoToChooseTeam() {
@@ -28,13 +28,12 @@ function CheckClientNavigationShouldExit(page) {
     return false;
 }
 
-var Sockets = (function() {
-    _socket.onopen = function()
-    {
+var Sockets = (function () {
+    _socket.onopen = function () {
         _socket.sendJson(ClientViewModel);
     }
 
-    _socket.onmessage = function(msg){
+    _socket.onmessage = function (msg) {
         var data = JSON.parse(msg.data);
 
         if (data.type == 'ViewModel') {
@@ -49,16 +48,16 @@ var Sockets = (function() {
     };
 
     return {
-        Init: function(name, team, position) {
+        Init: function (name, team, position) {
             ClientViewModel.name = name;
             ClientViewModel.team = team;
             ClientViewModel.position = position;
             _socket.sendJson(ClientViewModel);
         },
-        sendJson: function(data) {
+        sendJson: function (data) {
             _socket.sendJson(data);
         },
-        Close: function() {
+        Close: function () {
             _socket.sendJson({
                 type: 'close',
             })

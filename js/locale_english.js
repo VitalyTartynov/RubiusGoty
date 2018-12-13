@@ -4,15 +4,15 @@ var Res = {
     volumeOff: "&nbsp;&nbsp;OFF",
     Score: "PTS",
     Lives: "HLS",
-    HiNameChooseYourTeam: "Hi, <b>{name}</b>!<br/>Choose your team:",//hi, name, choose your team - choose-team-page
+    HiNameChooseYourTeam: "Hi, <b>{name}</b>!<br/>Choose your team:", //hi, name, choose your team - choose-team-page
     HiNameYouAreInTeamChooseYourRole: "Hey, <b>{name}</b>!<br/>You are in <b>{team}</b>.<br/>Choose your role:", //hi, name, you are in team, choose your role - choose-position-page
-    back:"Back", //back - change-name
-    HiNameYouAreInATeamAndShouldAct: "Hey, <b>{name}</b>!<br/>You're on <b>{team}</b>,<br/>and are going to <b>{position}</b>.",    //hi, name, your are in team and have to act - controls-page
+    back: "Back", //back - change-name
+    HiNameYouAreInATeamAndShouldAct: "Hey, <b>{name}</b>!<br/>You're on <b>{team}</b>,<br/>and are going to <b>{position}</b>.", //hi, name, your are in team and have to act - controls-page
     EnterYourName: "Enter your name", //enter your name - login-page
-    Enter: "Enter",//enter - login-page
-    KickAll: "Kick All",//- server-info
-    StartGame: "Start game",//- server-info
-    Name: "Name",//- server-info
+    Enter: "Enter", //enter - login-page
+    KickAll: "Kick All", //- server-info
+    StartGame: "Start game", //- server-info
+    Name: "Name", //- server-info
 
     Teams: [
         "Team Gold",
@@ -26,24 +26,24 @@ var Res = {
     ],
 
     Roles: {
-        ManageRole:'Manage',
-        ManageGood:'Praise',
-        ManageBad:'Scold',
-        ShootRole:'Commit code',
-        Shoot:'Commit!',
-        TurretRole:'Review code',
-        TurretLeft:'Accept',
-        TurretRight:'Reject',
-        MoveRole:'-move-',
-        ForwardRole:'Implement new features',
-        Forward:'Write a feature',
-        BackwardRole:'Rework old stuff',
-        Backward:'Rewrite anew',
-        TurnRole:'-turn-',
-        LeftRole:'Do this was',
-        Left:'Do this way',
-        RightRole:'Do that way',
-        Right:'Do that way'
+        ManageRole: 'Manage',
+        ManageGood: 'Praise',
+        ManageBad: 'Scold',
+        ShootRole: 'Commit code',
+        Shoot: 'Commit!',
+        TurretRole: 'Review code',
+        TurretLeft: 'Accept',
+        TurretRight: 'Reject',
+        MoveRole: '-move-',
+        ForwardRole: 'Implement new features',
+        Forward: 'Write a feature',
+        BackwardRole: 'Rework old stuff',
+        Backward: 'Rewrite anew',
+        TurnRole: '-turn-',
+        LeftRole: 'Do this was',
+        Left: 'Do this way',
+        RightRole: 'Do that way',
+        Right: 'Do that way'
     },
 
     ManagerGoodPhrases: [
@@ -76,8 +76,7 @@ var Res = {
         "Think of what the customer will say..."
     ],
 
-    generatedNamesAdjectives: 
-        ["aggressive",
+    generatedNamesAdjectives: ["aggressive",
         "reckless",
         "daredevil",
         "uncompromising",
@@ -97,9 +96,9 @@ var Res = {
         "irresistible",
         "dreaming",
         "exemplary",
-        "good-natured"],
-    generatedNamesNouns:
-        ["strategist",
+        "good-natured"
+    ],
+    generatedNamesNouns: ["strategist",
         "developer",
         "tester",
         "manager",
@@ -113,6 +112,7 @@ var Res = {
         "hacker",
         "explorer",
         "experimenter",
-        "leader"],
-    
+        "leader"
+    ],
+
 }

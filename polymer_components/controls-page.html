@@ -16,10 +16,7 @@
                         <button class$='col s12 btn btn-large waves-effect {{action.color}}'
                                 data-action$="{{action.action}}"
                                 on-down="buttonDownAction" on-up="buttonUpAction">
-
-                            <template is="dom-if" if="{{gameStarted}}">
-                                <img src$="images/{{action.icon}}" style="vertical-align:middle"/>
-                            </template>
+                            <img src="../images/{{action.icon}}" style="vertical-align:middle"/>
                             {{action.text}}
                         </button>
                     </div>

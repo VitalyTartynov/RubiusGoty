@@ -9,8 +9,8 @@ var Game = {
         this.Teams.push(this.SetupTeam("3", 2, 1008 - 40, 640, 180, 3200));
         this.Teams.push(this.SetupTeam("boss", -1, 520, 736, 180, 0));
     },
-    SetupTeam: function(name, networkIndex, spawnX, spawnY, spawnAngle, spawnCountdown) {
-        if(typeof spawnCountdown == 'undefined')
+    SetupTeam: function (name, networkIndex, spawnX, spawnY, spawnAngle, spawnCountdown) {
+        if (typeof spawnCountdown == 'undefined')
             spawnCountdown = -1; // never
         var team = {
             teamId: networkIndex,
@@ -22,18 +22,18 @@ var Game = {
             deaths: 0,
             Inputs: {},
             tanksSpawnsIn: spawnCountdown,
-            SpawnTank: function() {
+            SpawnTank: function () {
                 this.Tank = Game.spawnTank(this.spawnX, this.spawnY, this.spawnAngle, this.name, this.networkIndex);
                 Game.RootEntity.addChild(this.Tank);
             }
         };
-        if(name == "boss") {
+        if (name == "boss") {
             team.Inputs.ThrottleInput = new KeyboardBiDiInput(App.Keyboard, 'W', 'S');
             team.Inputs.TankTurnInput = new KeyboardBiDiInput(App.Keyboard, 'D', 'A');
             team.Inputs.TurretTurnInput = new KeyboardBiDiInput(App.Keyboard, 'L', 'J');
             team.Inputs.FireInput = new KeyboardCooldownInput(App.Keyboard, 'I', 400, false);
         } else {
-            if(team.teamId < 0)
+            if (team.teamId < 0)
                 throw "Misconfigured team";
             var viewModelFunction = function () {
                 if (!Sockets.ViewModel.teams)
@@ -139,7 +139,7 @@ var Game = {
         while (this.sparksCooldown > 0) {
             var p = points[i];
             var speed = Math.random() * 0.06;
-            var color = '#FFFF' + (0x100 + Math.random() * 0xFF).toString(16).substr(1,2); 
+            var color = '#FFFF' + (0x100 + Math.random() * 0xFF).toString(16).substr(1, 2);
             var spark = new Box(p.x, p.y, Math.random() * 360, 2, 3, color, [
                 new Behavior.Move,
                 new Behavior.TimedLife(300),
@@ -157,21 +157,30 @@ var Game = {
         }
     },
     powerupTimings: {
-        h: {period:10000, cooldown:10000},
-        D: {period:30000, cooldown:30000},
-        H: {period:30000, cooldown:15000},
+        h: {
+            period: 10000,
+            cooldown: 10000
+        },
+        D: {
+            period: 30000,
+            cooldown: 30000
+        },
+        H: {
+            period: 30000,
+            cooldown: 15000
+        },
     },
     spawnBonus: function (key) {
         var points = this.Map.powerupPoints[key];
         var i = Math.floor(Math.random() * points.length);
-        if(points[i].powerup)
+        if (points[i].powerup)
             return;
         var sprite;
         var angle;
         var offset = 0.5;
-        if(key == 'h') {
+        if (key == 'h') {
             key = 'hp',
-            sprite = App.Images.bonusHp;
+                sprite = App.Images.bonusHp;
             angle = 0;
             offset = 0;
         } else if (key == 'D') {
@@ -196,7 +205,7 @@ var Game = {
             var flashSprite = bonus.effectType === "hp" ? App.Images.heal : App.Images.flash;
             // let's try pickup flash on tank itself
             var flash = new Sprite(0, 0, Math.random() * 360, 80, 80, flashSprite, [
-                new Behavior.Animate(40, 8, 70), 
+                new Behavior.Animate(40, 8, 70),
                 new Behavior.TimedLife(539)
             ]);
             obj.addChild(flash);
@@ -209,16 +218,16 @@ var Game = {
                     obj.damageBonusTime = 20000;
                     if (obj.Head) obj.Head.items[0].imageGlow = true;
                     if (obj.Barrel) obj.Barrel.items[0].imageGlow = true;
-                    obj.damageBonusEnd = function() {
+                    obj.damageBonusEnd = function () {
                         delete this.damageBonusTime;
                         if (this.Head) delete this.Head.items[0].imageGlow;
                         if (this.Barrel) delete this.Barrel.items[0].imageGlow;
                     }
-                } else if(this.effectType === "speed") {
+                } else if (this.effectType === "speed") {
                     obj.speedBonusTime = 20000;
                     obj.RightTrack.imageGlow = true;
                     obj.LeftTrack.imageGlow = true;
-                    obj.speedBonusEnd = function() {
+                    obj.speedBonusEnd = function () {
                         delete this.speedBonusTime;
                         delete this.RightTrack.imageGlow;
                         delete this.LeftTrack.imageGlow;
@@ -240,34 +249,34 @@ var Game = {
             new Behavior.Move(0, 0.3),
             new Behavior.LifeInBounds(-8, -8, 1032, 856)
         ], [
-            new Box(0, 0, 0, 3 + damage*2, 4 + damage*3, "black"),
-            new Box(0, 0, 0, 1 + damage*2, 2 + damage*3, damage>1 ? "yellow" : "orange")
+            new Box(0, 0, 0, 3 + damage * 2, 4 + damage * 3, "black"),
+            new Box(0, 0, 0, 1 + damage * 2, 2 + damage * 3, damage > 1 ? "yellow" : "orange")
         ]);
         bullet.owner = tank;
-        bullet.width = 1 + damage*2;
-        bullet.height = 2 + damage*3;
+        bullet.width = 1 + damage * 2;
+        bullet.height = 2 + damage * 3;
         bullet.collider = new Collider(this.Map, "BS", this.RootEntity, ["tank"]);
         bullet.OnMapCollision = function (x, y) {
-            Game.spawnExplosion(this.x, this.y, 12 + damage*12);
+            Game.spawnExplosion(this.x, this.y, 12 + damage * 12);
             Game.Map.degradeTile(x, y);
             this.dead = true;
         };
         var ourTeam = team;
         bullet.OnObjectCollision = function (obj) {
-            Game.spawnExplosion(this.x, this.y, 12 + damage*12, obj.class == "tank" ? "tank" : null);
+            Game.spawnExplosion(this.x, this.y, 12 + damage * 12, obj.class == "tank" ? "tank" : null);
             if (obj.class == "tank") {
                 var tank = obj;
                 tank.hp = Math.max(0, tank.hp - damage);
                 if (tank.hp <= 0 && tank.Barrel) {
-                    ourTeam.kills ++;
+                    ourTeam.kills++;
                     ourTeam.popKills = true;
                     tank.addBehavior(new Behavior.TimedLife(3000));
                     tank.addBehavior(new Behavior.SpawnExplosions(200, 10));
                     tank.Barrel.dead = true;
                     tank.Barrel = null;
-                    for(var i in Game.Teams) {
+                    for (var i in Game.Teams) {
                         var team = Game.Teams[i];
-                        if(tank == team.Tank) {
+                        if (tank == team.Tank) {
                             team.Tank = null;
                             team.tanksSpawnsIn = 2500;
                         }
@@ -317,14 +326,15 @@ var Game = {
     },
     showBalloonMessage: function (tank, message) {
         var tanks = [];
-        this.Teams.forEach(function(team) {
-            if(team.Tank && team.Tank != tank)
+        this.Teams.forEach(function (team) {
+            if (team.Tank && team.Tank != tank)
                 tanks.push(team.Tank);
         });
         var newBalloon = new Balloon(message, [
             new Behavior.PositionBalloon(tank, tanks, 8, 8, 1032, 776), // 688 height?
-            new Behavior.TimedLife(6000, 300, 600)]);
-        
+            new Behavior.TimedLife(6000, 300, 600)
+        ]);
+
         // soft-kill the previous balloon for same tank
         for (var i = 0; i < this.GuiEntity.items.length; i++) {
             var oldBalloon = this.GuiEntity.items[i];
@@ -338,7 +348,7 @@ var Game = {
         var turnSpeed = 90 / 1000; //deg/msec
 
         Game.Teams.forEach(function (team) {
-            if(!team.Tank)
+            if (!team.Tank)
                 return;
             var tank = team.Tank;
 
@@ -376,7 +386,7 @@ var Game = {
                 phrases = Res.ManagerBadPhrases;
             }
             if (phrases) {
-                var phraseId =  Math.floor(Math.random() * phrases.length);
+                var phraseId = Math.floor(Math.random() * phrases.length);
                 var phrase = phrases[phraseId];
                 Game.showBalloonMessage(tank, phrase);
             }
@@ -398,13 +408,13 @@ var Game = {
                 team.popKills = false;
             }
 
-            if(!team.Tank) {
+            if (!team.Tank) {
                 // if already <0, abort and never spawn
-                if(team.tanksSpawnsIn < 0)
+                if (team.tanksSpawnsIn < 0)
                     return;
                 else {
                     team.tanksSpawnsIn -= delta;
-                    if(team.tanksSpawnsIn <= 0) {
+                    if (team.tanksSpawnsIn <= 0) {
                         team.SpawnTank();
                         if (team.name != "boss")
                             this.spawnFlash(team.spawnX, team.spawnY, 80);
@@ -442,12 +452,12 @@ var Game = {
 
                 if (tank.damageBonusTime) {
                     tank.damageBonusTime -= delta;
-                    if(tank.damageBonusTime <= 0)
+                    if (tank.damageBonusTime <= 0)
                         tank.damageBonusEnd();
                 }
                 if (tank.speedBonusTime) {
                     tank.speedBonusTime -= delta;
-                    if(tank.speedBonusTime <= 0)
+                    if (tank.speedBonusTime <= 0)
                         tank.speedBonusEnd();
                 }
 
@@ -458,10 +468,10 @@ var Game = {
             }
         }, this);
 
-        Object.keys(this.powerupTimings).forEach(function(key) {
+        Object.keys(this.powerupTimings).forEach(function (key) {
             var spawnTiming = this.powerupTimings[key];
             spawnTiming.cooldown -= delta;
-            if(spawnTiming.cooldown <= 0) {
+            if (spawnTiming.cooldown <= 0) {
                 Game.spawnBonus(key);
                 spawnTiming.cooldown = spawnTiming.period;
             }

@@ -1,4 +1,3 @@
-
 function NetworkCooldownInputKeyboardStub(team, property, position) {
     this.team = team;
     this.property = property;
@@ -7,7 +6,7 @@ function NetworkCooldownInputKeyboardStub(team, property, position) {
 }
 
 NetworkCooldownInputKeyboardStub.prototype = {
-    isDown: function(char) {
+    isDown: function (char) {
 
         var team = this.team();
         if (!team)
@@ -22,7 +21,7 @@ NetworkCooldownInputKeyboardStub.prototype = {
 
             if (member.position == that.position)
                 that.vacant = false;
-            if (state[that.property] == 1) 
+            if (state[that.property] == 1)
                 flag1 = 1;
         });
 
@@ -41,7 +40,7 @@ function NetworkBiDiInput(team, propertyForward, propertyBackward, positionForwa
 }
 
 NetworkBiDiInput.prototype = {
-    read: function() {
+    read: function () {
         this.valueForward = 0;
         this.valueBackward = 0;
         this.vacantForward = true;
@@ -61,32 +60,31 @@ NetworkBiDiInput.prototype = {
                 that.vacantForward = false;
             if (state[that.propertyForward] == 1)
                 that.valueForward = 1;
-            
+
             if (member.position == that.positionBackward)
                 that.vacantBackward = false;
             if (state[that.propertyBackward] == 1)
                 that.valueBackward = 1;
         });
 
-        if(this.valueForward == this.valueBackward)
+        if (this.valueForward == this.valueBackward)
             return 0;
-        if(this.valueForward)
+        if (this.valueForward)
             return 1;
-        if(this.valueBackward)
+        if (this.valueBackward)
             return -1;
     }
 }
 
-var Sockets = (function() {
-    if(_socket) {
-        _socket.onopen = function()
-        {
+var Sockets = (function () {
+    if (_socket) {
+        _socket.onopen = function () {
             _socket.sendJson({
                 isAdmin: true,
             });
         }
 
-        _socket.onmessage = function(msg){
+        _socket.onmessage = function (msg) {
             var data = JSON.parse(msg.data);
             console.log('got msg ' + msg.data);
 

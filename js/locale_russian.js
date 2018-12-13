@@ -4,15 +4,15 @@ var Res = {
     volumeOff: "ВЫКЛ",
     Score: "PTS",
     Lives: "HLH",
-    HiNameChooseYourTeam: "Привет, <b>{name}</b>!<br/>Выбирай свою команду:",//hi, name, choose your team - choose-team-page
+    HiNameChooseYourTeam: "Привет, <b>{name}</b>!<br/>Выбирай свою команду:", //hi, name, choose your team - choose-team-page
     HiNameYouAreInTeamChooseYourRole: "Привет, <b>{name}</b>!<br/>Ты в команде <b>{team}</b>.<br/>Выбери свою роль:", //hi, name, you are in team, choose your role - choose-position-page
-    back:"Назад", //back - change-name
-    HiNameYouAreInATeamAndShouldAct: "Привет, <b>{name}</b>!<br/>Ты в команде <b>{team}</b>,<br/>и должен <b>{position}</b>.",    //hi, name, your are in team and have to act - controls-page
+    back: "Назад", //back - change-name
+    HiNameYouAreInATeamAndShouldAct: "Привет, <b>{name}</b>!<br/>Ты в команде <b>{team}</b>,<br/>и должен <b>{position}</b>.", //hi, name, your are in team and have to act - controls-page
     EnterYourName: "Введи свой позывной:", //enter your name - login-page
-    Enter: "Войти",//enter - login-page
-    KickAll: "Выбить всех",//- server-info
-    StartGame: "Открыть карты",//- server-info
-    Name: "Имя",//- server-info
+    Enter: "Войти", //enter - login-page
+    KickAll: "Выбить всех", //- server-info
+    StartGame: "Открыть карты", //- server-info
+    Name: "Имя", //- server-info
 
     Teams: [
         "золото",
@@ -26,24 +26,24 @@ var Res = {
     ],
 
     Roles: {
-        ManageRole:'руководить',
-        ManageGood:'Хвалить',
-        ManageBad:'Ругать',
-        ShootRole:'атаковать',
-        Shoot:'Огонь!',
-        TurretRole:'наводить',
-        TurretLeft:'Орудие влево',
-        TurretRight:'Орудие вправо',
-        MoveRole:'вести',
-        ForwardRole:'-вести вперёд-',
-        Forward:'В атаку!',
-        BackwardRole:'-вести назад-',
-        Backward:'Отступаем!',
-        TurnRole:'направлять',
-        LeftRole:'-левее-',
-        Left:'Лево руля!',
-        RightRole:'-правее-',
-        Right:'Право руля!'
+        ManageRole: 'руководить',
+        ManageGood: 'Хвалить',
+        ManageBad: 'Ругать',
+        ShootRole: 'атаковать',
+        Shoot: 'Огонь!',
+        TurretRole: 'наводить',
+        TurretLeft: 'Орудие влево',
+        TurretRight: 'Орудие вправо',
+        MoveRole: 'вести',
+        ForwardRole: '-вести вперёд-',
+        Forward: 'В атаку!',
+        BackwardRole: '-вести назад-',
+        Backward: 'Отступаем!',
+        TurnRole: 'направлять',
+        LeftRole: '-левее-',
+        Left: 'Лево руля!',
+        RightRole: '-правее-',
+        Right: 'Право руля!'
     },
 
     ManagerGoodPhrases: [
@@ -76,8 +76,7 @@ var Res = {
         "Нам нечем ответить противнику!",
     ],
 
-    generatedNamesAdjectives: 
-        ["агрессивный",
+    generatedNamesAdjectives: ["агрессивный",
         "безрассудный",
         "бескомпромиссный",
         "отважный",
@@ -96,9 +95,9 @@ var Res = {
         "неотразимый",
         "мечтательный",
         "образцовый",
-        "добродушный"],
-    generatedNamesNouns:
-        ["стратег",
+        "добродушный"
+    ],
+    generatedNamesNouns: ["стратег",
         "девелопер",
         "тестировщик",
         "менеджер",
@@ -112,5 +111,6 @@ var Res = {
         "хакер",
         "исследователь",
         "экспериментатор",
-        "лидер"],
+        "лидер"
+    ],
 }

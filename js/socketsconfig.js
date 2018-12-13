@@ -13,39 +13,62 @@ var _positions = [
     {
         title: Res.Roles.ShootRole,
         id: 'fire',
-        actions: [
-            {action:'fire', text: Res.Roles.Shoot, icon: 'button-fire.png'}
-        ]
+        actions: [{
+            action: 'fire',
+            text: Res.Roles.Shoot,
+            icon: 'button-fire.png'
+        }]
     },
     {
         title: Res.Roles.TurretRole,
         id: 'turret',
-        actions: [
-            {action:'turretLeft', text: Res.Roles.TurretLeft, icon: 'button-turret-left.png'},
-            {action:'turretRight', text: Res.Roles.TurretRight, icon: 'button-turret-right.png'}
+        actions: [{
+                action: 'turretLeft',
+                text: Res.Roles.TurretLeft,
+                icon: 'button-turret-left.png'
+            },
+            {
+                action: 'turretRight',
+                text: Res.Roles.TurretRight,
+                icon: 'button-turret-right.png'
+            }
         ]
     },
     {
         title: Res.Roles.MoveRole,
         id: 'move1',
-        actions: [
-            {action:'moveForward', text: Res.Roles.Forward, icon: 'button-forward.png'},
-            {action:'moveBackward', text: Res.Roles.Backward, icon: 'button-backward.png'}
+        actions: [{
+                action: 'moveForward',
+                text: Res.Roles.Forward,
+                icon: 'button-forward.png'
+            },
+            {
+                action: 'moveBackward',
+                text: Res.Roles.Backward,
+                icon: 'button-backward.png'
+            }
         ]
     },
     {
         title: Res.Roles.TurnRole,
         id: 'turn1',
-        actions: [
-            {action:'turnLeft', text: Res.Roles.Left, icon: 'button-left.png'},
-            {action:'turnRight', text: Res.Roles.Right, icon: 'button-right.png'}
+        actions: [{
+                action: 'turnLeft',
+                text: Res.Roles.Left,
+                icon: 'button-left.png'
+            },
+            {
+                action: 'turnRight',
+                text: Res.Roles.Right,
+                icon: 'button-right.png'
+            }
         ]
     }
 ];
 
 var _socket;
 
-if(webSocketUrl != "ws://") { // opened from disk?
+if (webSocketUrl != "ws://") { // opened from disk?
     _socket = new ReconnectingWebSocket(webSocketUrl);
 
     _socket.sendJson = function (message, callback) {

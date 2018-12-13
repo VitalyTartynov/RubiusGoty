@@ -1,41 +1,41 @@
 var EntityBase = {
-    addBehavior: function(beh) {
+    addBehavior: function (beh) {
         var name = beh.name;
         beh.init(this);
         this._behaviors[name] = beh.exec;
     },
 
-    draw: function(ctx) {
-        if(typeof this.items != 'undefined')
-            this.items.forEach(function(item, i, arr){
+    draw: function (ctx) {
+        if (typeof this.items != 'undefined')
+            this.items.forEach(function (item, i, arr) {
                 ctx.save();
-                if(typeof item.alpha != 'undefined')
+                if (typeof item.alpha != 'undefined')
                     ctx.globalAlpha = item.alpha;
                 ctx.translate(item.x, item.y);
                 ctx.rotate(item.angle);
-                if(typeof item.scaleX != 'undefined')
+                if (typeof item.scaleX != 'undefined')
                     ctx.scale(item.scaleX, item.scaleY);
                 item.draw(ctx);
                 ctx.restore();
             });
         else // don't try to draw groups. if enabling, make sure "undercofigured object" is not raised
-        if(typeof this.image != 'undefined') {
-            if(!this.spriteWidth)
-                ctx.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);
-            else
-                ctx.drawImage(this.image, this.spriteIndex * this.spriteWidth, 0, this.spriteWidth, this.image.height,
-                                          -this.width / 2, -this.height / 2, this.width, this.height);
-            if(this.imageGlow) {
-                ctx.globalCompositeOperation = 'color-dodge'; // 'color-dodge' for turrets 'lighter' for tracks
-                    if(!this.spriteWidth)
+            if (typeof this.image != 'undefined') {
+                if (!this.spriteWidth)
+                    ctx.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);
+                else
+                    ctx.drawImage(this.image, this.spriteIndex * this.spriteWidth, 0, this.spriteWidth, this.image.height,
+                        -this.width / 2, -this.height / 2, this.width, this.height);
+                if (this.imageGlow) {
+                    ctx.globalCompositeOperation = 'color-dodge'; // 'color-dodge' for turrets 'lighter' for tracks
+                    if (!this.spriteWidth)
                         ctx.drawImage(this.image, -this.width / 2, -this.height / 2, this.width, this.height);
                     else
                         ctx.drawImage(this.image, this.spriteIndex * this.spriteWidth, 0, this.spriteWidth, this.image.height,
-                                                -this.width / 2, -this.height / 2, this.width, this.height);
-                ctx.globalCompositeOperation = 'source-over';
-            }
+                            -this.width / 2, -this.height / 2, this.width, this.height);
+                    ctx.globalCompositeOperation = 'source-over';
+                }
 
-        } else if(typeof this.color != 'undefined') {
+            } else if (typeof this.color != 'undefined') {
             ctx.fillStyle = this.color;
             ctx.fillRect(-this.width / 2, -this.height / 2, this.width, this.height);
 
@@ -47,24 +47,24 @@ var EntityBase = {
             console.debug("Underconfigured object, unable to draw");
     },
 
-    update: function(delta) {
+    update: function (delta) {
         // run updates
-        for(var behavior in this._behaviors)
+        for (var behavior in this._behaviors)
             this._behaviors[behavior](this, delta);
 
         // run updates on children an remove dead children, if any
-        if(typeof this.items != 'undefined')
-            for(var i = 0; i < this.items.length; i++) {
+        if (typeof this.items != 'undefined')
+            for (var i = 0; i < this.items.length; i++) {
                 this.items[i].update(delta);
-                if(this.items[i].dead){
+                if (this.items[i].dead) {
                     this.items.splice(i, 1);
                     i--;
                 }
             }
     },
 
-    addChild: function(child, index) {
-        if(typeof index == 'undefined')
+    addChild: function (child, index) {
+        if (typeof index == 'undefined')
             this.items.push(child);
         else
             this.items.splice(index, 0, child);
@@ -73,13 +73,13 @@ var EntityBase = {
 
     // takes an obj in descendantParent's coordinate system, and changes its coordinates to this'.
     // this must be a predecessor of descendantParent
-    changeCoordinatesFromDescendant: function(obj, descendantParent) {
+    changeCoordinatesFromDescendant: function (obj, descendantParent) {
         var currentParent = descendantParent,
             lastX, lastY, lastA;
         while (currentParent != this) {
             lastX = obj.x,
-            lastY = obj.y,
-            lastA = obj.angle;
+                lastY = obj.y,
+                lastA = obj.angle;
             obj.x = currentParent.x - Math.sin(currentParent.angle) * lastY + Math.cos(currentParent.angle) * lastX;
             obj.y = currentParent.y + Math.cos(currentParent.angle) * lastY + Math.sin(currentParent.angle) * lastX;
             obj.angle = currentParent.angle + lastA;
@@ -94,10 +94,10 @@ function ObjectGroup(x, y, angle, behaviors, items) {
     this.y = y;
     this.angle = angle / 180 * Math.PI;
     this.items = items;
-    for(var i = 0, len = this.items.length; i < len; i++)
+    for (var i = 0, len = this.items.length; i < len; i++)
         this.items[i].parent = this;
     this._behaviors = {};
-    for(var i = 0; i < behaviors.length; i++)
+    for (var i = 0; i < behaviors.length; i++)
         this.addBehavior(behaviors[i]);
 }
 
@@ -107,15 +107,15 @@ function Sprite(x, y, angle, width, height, image, behaviors) {
     this.angle = angle / 180 * Math.PI;
     this.width = width;
     this.height = height;
-    if( typeof image == 'string' ) {
+    if (typeof image == 'string') {
         var imgObj = new Image();
         imgObj.src = image;
         image = imgObj;
     }
     this.image = image;
     this._behaviors = {};
-    if(typeof behaviors != 'undefined')
-        for(var i = 0; i < behaviors.length; i++)
+    if (typeof behaviors != 'undefined')
+        for (var i = 0; i < behaviors.length; i++)
             this.addBehavior(behaviors[i]);
 }
 
@@ -127,16 +127,16 @@ function Box(x, y, angle, width, height, color, behaviors) {
     this.height = height;
     this.color = color;
     this._behaviors = {};
-    if(typeof behaviors != 'undefined')
-        for(var i = 0; i < behaviors.length; i++)
+    if (typeof behaviors != 'undefined')
+        for (var i = 0; i < behaviors.length; i++)
             this.addBehavior(behaviors[i]);
 }
 
 function Balloon(text, behaviors) {
     this.balloonText = text;
     this._behaviors = {};
-    if(typeof behaviors != 'undefined')
-        for(var i = 0; i < behaviors.length; i++)
+    if (typeof behaviors != 'undefined')
+        for (var i = 0; i < behaviors.length; i++)
             this.addBehavior(behaviors[i]);
 }
 
@@ -144,8 +144,8 @@ ObjectGroup.prototype = EntityBase;
 Box.prototype = EntityBase;
 Sprite.prototype = {
     __proto__: EntityBase,
-    setImage: function(image){
-        if( typeof image == 'string' ) {
+    setImage: function (image) {
+        if (typeof image == 'string') {
             var imgObj = new Image();
             imgObj.src = image;
             image = imgObj;
@@ -156,14 +156,14 @@ Sprite.prototype = {
 
 Balloon.prototype = {
     __proto__: EntityBase,
-    draw: function(ctx) {
+    draw: function (ctx) {
         // if not measured
-        if(!this.balloonTextWidth) {
+        if (!this.balloonTextWidth) {
             ctx.font = "16px 'Russo One'";
             this.balloonTextWidth = ctx.measureText(this.balloonText).width;
             console.log("Balloon.draw - init");
-        // if text was measured and direction was resolved
-        } else if(this.balloonLeft) {
+            // if text was measured and direction was resolved
+        } else if (this.balloonLeft) {
             console.log("Balloon.draw - draw");
             ctx.lineCap = "round";
             ctx.lineWidth = 30;
@@ -174,7 +174,7 @@ Balloon.prototype = {
             var calloutHeight = spawnPhase * deathPhase * 30;
             var balloonY =
                 Math.max(this.balloonMinY - this.y + 20,
-                Math.min(this.balloonMaxY - this.y - 20, this.balloonY));
+                    Math.min(this.balloonMaxY - this.y - 20, this.balloonY));
             var balloonLeft = this.balloonLeft;
             var balloonRight = this.balloonRight;
             var overshootRight = this.balloonRight + this.x + 20 - this.balloonMaxX;
@@ -189,10 +189,10 @@ Balloon.prototype = {
                 }
             }
             var originX = Math.max(balloonLeft, Math.min(balloonRight, 0));
-            calloutHeight *= Math.sqrt(balloonY*balloonY + originX*originX) / 45;
-            var calloutAngle = Math.atan2(-balloonY, -originX) - Math.PI/2;
+            calloutHeight *= Math.sqrt(balloonY * balloonY + originX * originX) / 45;
+            var calloutAngle = Math.atan2(-balloonY, -originX) - Math.PI / 2;
 
-            var drawFunc = function() {
+            var drawFunc = function () {
                 ctx.globalAlpha = deathPhase;
                 if (deathPhase == 1) {
                     ctx.save();

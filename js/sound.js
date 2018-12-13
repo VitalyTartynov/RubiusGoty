@@ -3,28 +3,28 @@ var Sound = {
     // for all required sounds, shouldn't have overhead. but not today.
     Cache: [],
 
-    GetKey: function(url, id) {
-        if(id)
+    GetKey: function (url, id) {
+        if (id)
             return url + "(" + id + ")";
         return url;
     },
 
-    PutAudio: function(key, audio) {
+    PutAudio: function (key, audio) {
         var array = this.Cache[key];
-        if(!array) {
+        if (!array) {
             array = [];
             this.Cache[key] = array;
         }
         array.push(audio);
     },
 
-    GetIdleAudio: function(key) {
+    GetIdleAudio: function (key) {
         var array = this.Cache[key];
 
         if (!array)
             return null;
 
-        for (var i = 0; i < array.length; i++){
+        for (var i = 0; i < array.length; i++) {
             var sound = array[i];
             if (sound.ended || sound.paused) {
                 sound.currentTime = 0;
@@ -35,7 +35,7 @@ var Sound = {
         return null;
     },
 
-    Load: function(url, onloaded, id, onlyStart) {
+    Load: function (url, onloaded, id, onlyStart) {
         var key = this.GetKey(url, id);
         var audio = new Audio(url);
         if (onlyStart)
@@ -44,11 +44,11 @@ var Sound = {
             audio.oncanplaythrough = onloaded;
         this.PutAudio(key, audio);
     },
-    
-    Play: function(url, vol, loops, id) {
+
+    Play: function (url, vol, loops, id) {
         var key = this.GetKey(url, id);
         var audio = this.GetIdleAudio(key);
-        if(!audio) {
+        if (!audio) {
             audio = new Audio(url);
             this.PutAudio(key, audio);
             // there shouldn't be a need to wait for this to load, if we called Load on start
@@ -62,10 +62,10 @@ var Sound = {
     }
 };
 
-var volumeToFraction = function(intVolume) {
-    return Math.pow(intVolume/100, 2);
+var volumeToFraction = function (intVolume) {
+    return Math.pow(intVolume / 100, 2);
 }
 
-var volumeToInteger = function(fracVolume) {
+var volumeToInteger = function (fracVolume) {
     return Math.sqrt(fracVolume) * 100;
 }
