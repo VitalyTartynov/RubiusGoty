@@ -1,15 +1,5 @@
-
-var urlToJoinGame = null; // put the url to connect to here
-var webSocketUrl;
-
-if (location.host.indexOf("github.io") > -1) {
-    webSocketUrl = "wss://cactus-trapezoid.glitch.me/";
-    urlToJoinGame = location.host + "/RubiusGoty";
-} else {
-    webSocketUrl = "ws://" + location.host;
-    if(!urlToJoinGame)
-        urlToJoinGame = location.host;
-}
+var webSocketUrl = "ws://" + location.host;
+var urlToJoinGame = 'http://' + location.host;
 
 var _positions = [
     {

@@ -139,7 +139,7 @@ var App = {
         ctx.textBaseline = "middle";
         ctx.textAlign = "center";
         if(!urlToJoinGame)
-            urlToJoinGame = location.host;
+            urlToJoinGame = 'http://' + location.host;
         ctx.save();
         ctx.translate(x, y);
         // 5 degrees max tilt, Pi seconds period
