@@ -2,14 +2,14 @@ var webSocketUrl = "ws://" + location.host;
 var urlToJoinGame = 'http://' + location.host;
 
 var _positions = [
-    {
-        title: Res.Roles.ManageRole,
-        id: 'manager',
-        actions: [
-            {action:'managerGood', text: Res.Roles.ManageGood, icon: 'button-good.png'},
-            {action:'managerBad', text: Res.Roles.ManageBad, icon: 'button-bad.png'}
-        ]
-    },
+    // {
+    //     title: Res.Roles.ManageRole,
+    //     id: 'manager',
+    //     actions: [
+    //         {action:'managerGood', text: Res.Roles.ManageGood, icon: 'button-good.png'},
+    //         {action:'managerBad', text: Res.Roles.ManageBad, icon: 'button-bad.png'}
+    //     ]
+    // },
     {
         title: Res.Roles.ShootRole,
 

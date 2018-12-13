@@ -148,10 +148,6 @@ wss.on('connection', function connection(ws) {
     client.SendClientModel();
 
     ws.on('close', function close() {
-        /*if (ws.gameState) {
-            _gameState.state = 0;
-            SendClientViewModelToAllClients();
-        }*/
         RemoveFromArray(admin, ws);
         serverModel.teams.forEach(function (team) {
             RemoveFromArray(team.members, client);
@@ -177,9 +173,7 @@ wss.on('connection', function connection(ws) {
         if (data.type == 'join') {
             model.name = data.name;
             model.position = data.position;
-
             client.UpdateTeam(data.team);
-
             SendServerModel();
         } else if (data.type == 'ping') {
             UpdateTeamPositions(model.team);
@@ -218,9 +212,10 @@ wss.on('connection', function connection(ws) {
 server.on('request', app);
 if(!iface)
     server.listen(port, function () {
-        console.log('Your app is listening on port ' + server.address().port + ", default address.");
+        console.log('App is listening on http://localhost:' + server.address().port);
+        console.log('Game board on http://localhost:' + server.address().port + '/game.html');
     });
 else
     server.listen(port, iface, function () {
-        console.log('Your app is listening on ' + server.address().address + ":" + server.address().port);
+        console.log('App is listening on http://' + server.address().address + ":" + server.address().port);
     });

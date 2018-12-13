@@ -153,15 +153,14 @@ var App = {
     },
 
     EndFrame: function(fps, panic) {
-            if (panic) {
-                var discardedTime = Math.round(MainLoop.resetFrameDelta());
-                console.warn('Main loop panicked, probably because the browser tab was put in the background. Discarding ' + discardedTime + 'ms');
-            }
+        if (panic) {
+            var discardedTime = Math.round(MainLoop.resetFrameDelta());
+            console.warn('Main loop panicked, probably because the browser tab was put in the background. Discarding ' + discardedTime + 'ms');
+        }
     },
 
     assetsLoaded: 0,
     EntryPoint: function() {
-
         App.Keyboard = new Keyboard();
         App.Canvas = document.getElementById('gameCanvas');
         App.Context = App.Canvas.getContext('2d');
@@ -182,7 +181,6 @@ var App = {
             "./sound/shot3.mp3",
             "./sound/spawn.ogg",
             "./sound/bonus.ogg",
-            //"./sound/metal-scrape.mp3",
         ];
 
         var assetCount = sounds.length + 2; // "engine working" and music
@@ -289,7 +287,7 @@ var App = {
                 .setEnd(App.EndFrame)
                 .start();
     },
-    
+
     SetVolumeText: function(intVolume) {
         var str = intVolume == 0 
             ? Res.volumeOff
