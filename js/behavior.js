@@ -1,8 +1,7 @@
-
 // Behaviors store their parameters inside target object.
 // Constructors construct init() with initial values, everything else is static.
 
-var Behavior = {}
+var Behavior = {};
 
 Behavior.Move = function(vx, vy, va) {
     this.init = function(obj) {
@@ -11,24 +10,25 @@ Behavior.Move = function(vx, vy, va) {
         obj.moveAngSpeed = va || 0;
     };
 };
+
 Behavior.Move.prototype = {
-    name: "move",
+    name: 'move',
     exec: function(obj, delta) {
         var newx = obj.x;
         var newy = obj.y;
         var newAngle = obj.angle;
 
-        if(obj.moveYSpeed != 0) {
+        if(obj.moveYSpeed !== 0) {
             newx -= Math.sin(obj.angle) * delta * obj.moveYSpeed;
             newy += Math.cos(obj.angle) * delta * obj.moveYSpeed;
         }
 
-        if(obj.moveXSpeed != 0) {
+        if(obj.moveXSpeed !== 0) {
             newx -= Math.cos(obj.angle) * delta * obj.moveXSpeed;
             newy += Math.sin(obj.angle) * delta * obj.moveXSpeed;
         }
 
-        if(obj.moveAngSpeed != 0) {
+        if(obj.moveAngSpeed !== 0) {
             newAngle += delta * obj.moveAngSpeed / 180 * Math.PI;
             if( newAngle < 0)
                 newAngle += Math.PI * 2;
@@ -49,7 +49,7 @@ Behavior.Move.prototype = {
                         obj.OnMapCollision( colliderRetVal.tileX, colliderRetVal.tileY );
                     }
                 } else {
-                    if (obj.owner && obj.owner == colliderRetVal.object) {
+                    if (obj.owner && obj.owner === colliderRetVal.object) {
                         apply = true;
                     } else if (obj.OnObjectCollision) {
                         obj.OnObjectCollision(colliderRetVal.object);
@@ -74,8 +74,9 @@ Behavior.MoveTank = function(leftTrackSpeed, rightTrackSpeed) {
         obj.maxRotationSpeed = 60/1000; //deg/msec
     };
 };
+
 Behavior.MoveTank.prototype = {
-    name: "movetank",
+    name: 'movetank',
     exec: function(obj, delta) {
         var newx = obj.x;
         var newy = obj.y;
@@ -95,32 +96,33 @@ Behavior.MoveTank.prototype = {
 
         var traction = (ltraction + rtraction) / 2;
         var limit = (llimit + rlimit) / 2;
-        if( obj.speedBonusTime )
+        if (obj.speedBonusTime) {
             limit *= 2;
+        }
 
-        if( Math.random() < 0.01 && obj.LeftTrack.torque != 0 )
+        if (Math.random() < 0.01 && obj.LeftTrack.torque !== 0)
             Game.Map.degradeTileAt(ltx, lty);
-        if( Math.random() < 0.01 && obj.RightTrack.torque != 0 )
+        if( Math.random() < 0.01 && obj.RightTrack.torque !== 0 )
             Game.Map.degradeTileAt(rtx, rty);
 
         var rotationDir = obj.LeftTrack.torque - obj.RightTrack.torque;
-        if (rotationDir != 0 && Math.sign(rotationDir) != Math.sign(obj.rotationSpeed)) obj.rotationSpeed *= 0.8;
+        if (rotationDir !== 0 && Math.sign(rotationDir) !== Math.sign(obj.rotationSpeed)) obj.rotationSpeed *= 0.8;
         var maxRotationSpeed = obj.maxRotationSpeed * limit;
         obj.rotationSpeed = obj.rotationSpeed + rotationDir * traction * delta * maxRotationSpeed / 1000;
         if (Math.abs(obj.rotationSpeed) > maxRotationSpeed) obj.rotationSpeed = Math.sign(obj.rotationSpeed) * maxRotationSpeed;
         
         var speedDir = obj.LeftTrack.torque + obj.RightTrack.torque;
-        if (speedDir != 0 && Math.sign(speedDir) != Math.sign(obj.speed)) obj.speed *= 0.8;
+        if (speedDir !== 0 && Math.sign(speedDir) !== Math.sign(obj.speed)) obj.speed *= 0.8;
         var maxSpeed = obj.maxSpeed * limit;
         obj.speed = obj.speed + (obj.LeftTrack.torque + obj.RightTrack.torque) / 2 * traction * delta * maxSpeed / 1000;
         if (Math.abs(obj.speed) > maxSpeed) obj.speed = Math.sign(obj.speed) * maxSpeed;
         
-        if(obj.speed != 0) {
+        if(obj.speed !== 0) {
             newx -= Math.sin(obj.angle) * delta * obj.speed;
             newy += Math.cos(obj.angle) * delta * obj.speed;
         }
 
-        if(obj.rotationSpeed != 0) {
+        if(obj.rotationSpeed !== 0) {
             newAngle += delta * obj.rotationSpeed / 180 * Math.PI;
             if( newAngle < 0)
                 newAngle += Math.PI * 2;
@@ -128,11 +130,11 @@ Behavior.MoveTank.prototype = {
                 newAngle -= Math.PI * 2;
         }
 
-        if (obj.LeftTrack.torque + obj.RightTrack.torque == 0) {
+        if (obj.LeftTrack.torque + obj.RightTrack.torque === 0) {
             obj.speed *= 1 - (0.10 * traction);
         }
 
-        if (obj.LeftTrack.torque - obj.RightTrack.torque != 0) {
+        if (obj.LeftTrack.torque - obj.RightTrack.torque !== 0) {
             obj.speed *= 1 - (0.02 * traction);
         } else {
             obj.rotationSpeed *= 0.9;
@@ -174,19 +176,20 @@ Behavior.MoveTank.prototype = {
 };
 
 Behavior.TimedLife = function(time, spawnTime, dieTime) {
-    this.init = function(obj){
+    this.init = function(obj) {
         obj.lifeTimeout = time || 0;
-        if(spawnTime) {
+        if (spawnTime) {
             obj.lifeSpawnTimeout = spawnTime;
             obj.lifeSpawnPassed = 0;
         }
-        if(dieTime) {
+        if (dieTime) {
             obj.lifeDieTimeout = dieTime;
         }
-    }
+    };
 };
+
 Behavior.TimedLife.prototype = {
-    name: "lifetimeout",
+    name: 'lifetimeout',
     exec: function(obj, delta) {
         if(obj.lifeTimeout < 0)
             return;
@@ -198,7 +201,7 @@ Behavior.TimedLife.prototype = {
             obj.lifeSpawnPassed += delta;
             // spawn phase increases from 0 to 1
             obj.lifeSpawnPhase = Math.min(obj.lifeSpawnPassed / obj.lifeSpawnTimeout, 1);
-            if(obj.lifeSpawnPhase == 1)
+            if(obj.lifeSpawnPhase === 1)
                 delete obj.lifeSpawnTimeout;
         }
         if(obj.lifeDieTimeout && obj.lifeTimeout < obj.lifeDieTimeout) {
@@ -223,7 +226,7 @@ Behavior.LifeInBounds = function(minx, miny, maxx, maxy) {
 };
 
 Behavior.LifeInBounds.prototype = {
-        name: "lifebounds",
+        name: 'lifebounds',
         exec: function(obj, delta) {
             if(obj.dead)
                 return;
@@ -237,14 +240,14 @@ Behavior.LifeInBounds.prototype = {
 
 Behavior.Custom = function(func) {
     this.init = function(obj) {
-        obj.customFunc = func
-    }
+        obj.customFunc = func;
+    };
 };
 
 Behavior.Custom.prototype = {
-        name: "custom",
-        exec: function(obj, delta) {
-            obj.customFunc(delta)
+    name: 'custom',
+    exec: function(obj, delta) {
+        obj.customFunc(delta);
     }
 };
 
@@ -259,18 +262,18 @@ Behavior.Animate = function(spriteWidth, spriteCount, msecPerFrame, startFrame) 
 };
 
 Behavior.Animate.prototype = {
-    name: "animate",
+    name: 'animate',
     exec: function(obj, delta) {
-        if(!obj.animDelay)
+        if (!obj.animDelay)
             return;
         obj.animCurrentTime += delta;
         var frameInc = Math.floor(obj.animCurrentTime / obj.animDelay);
-        if(frameInc > 0) {
+        if (frameInc > 0) {
             obj.spriteIndex = (obj.spriteIndex + frameInc) % obj.spriteCount;
             obj.animCurrentTime = obj.animCurrentTime % obj.animDelay;
         }
     }
-}
+};
 
 Behavior.Wobble = function(rotateAngle, rotatePeriod, scaleFactor, scalePeriod) {
     this.init = function(obj) {
@@ -283,14 +286,14 @@ Behavior.Wobble = function(rotateAngle, rotatePeriod, scaleFactor, scalePeriod) 
 };
 
 Behavior.Wobble.prototype = {
-    name: "wobble",
+    name: 'wobble',
     exec: function(obj, delta) {
         obj.angle = obj.wobbleBaseAngle +
-            obj.wobbleAngle / 180 * Math.sin(App.elapsedMsec/1000*Math.PI*obj.wobbleAnglePeriod);
-        obj.scaleX = 1 + obj.wobbleScale * Math.sin(App.elapsedMsec/1000*Math.PI*obj.wobbleScalePeriod);
+            obj.wobbleAngle / 180 * Math.sin(App.elapsedMsec / 1000 * Math.PI * obj.wobbleAnglePeriod);
+        obj.scaleX = 1 + obj.wobbleScale * Math.sin(App.elapsedMsec / 1000 * Math.PI * obj.wobbleScalePeriod);
         obj.scaleY = obj.scaleX;
     }
-}
+};
 
 Behavior.SpawnExplosions = function(delay, count) {
     this.init = function(obj) {
@@ -301,24 +304,25 @@ Behavior.SpawnExplosions = function(delay, count) {
 };
 
 Behavior.SpawnExplosions.prototype = {
-    name: "spawnexplosions",
+    name: 'spawnexplosions',
     exec: function(obj, delta) {
-        if(obj.explosionsLeft == 0)
+        if (obj.explosionsLeft === 0)
             return;
         obj.explosionCurrentTime += delta;
         var pendingExplosions = Math.min(Math.floor(obj.explosionCurrentTime / obj.explosionDelay), obj.explosionsLeft);
-        while(pendingExplosions > 0){
-            var pt = new Geom.Point(-obj.width/2 + Math.random() * obj.width, -obj.height/2 + Math.random() * obj.height);
+        while (pendingExplosions > 0) {
+            var pt = new Geom.Point(-obj.width / 2 + Math.random() * obj.width,
+                -obj.height / 2 + Math.random() * obj.height);
             pt = pt.Rotate(obj.angle).Translate(obj.x, obj.y);
             var type = null;
-            if (pendingExplosions == 1) type = "echo";
-            Game.spawnExplosion(pt.x, pt.y, 24 + Math.random()*16, type);
+            if (pendingExplosions === 1) type = 'echo';
+            Game.spawnExplosion(pt.x, pt.y, 24 + Math.random() * 16, type);
             pendingExplosions--;
             obj.explosionsLeft--;
         }
         obj.explosionCurrentTime %= obj.explosionDelay;
     }
-}
+};
 
 Behavior.PositionBalloon = function(tank, otherTanks, minx, miny, maxx, maxy) {
     this.init = function(obj) {
@@ -335,11 +339,11 @@ Behavior.PositionBalloon = function(tank, otherTanks, minx, miny, maxx, maxy) {
 };
 
 Behavior.PositionBalloon.prototype = {
-    name: "positionballoon",
+    name: 'positionballoon',
     exec: function (obj, delta) {
         // first try to init
-        if (typeof obj.balloonY == 'undefined' && obj.balloonTextWidth) {
-            console.log("Behavior.PositionBalloon - init");
+        if (typeof obj.balloonY != 'undefined' && obj.balloonTextWidth) {
+            console.log('Behavior.PositionBalloon - init');
             var balloonWidth = obj.balloonTextWidth;
             var offset = 45;
             var tankY = obj.balloonTank.y;
@@ -357,7 +361,7 @@ Behavior.PositionBalloon.prototype = {
             var enemyToLeft = false;
             var enemyToRight = false;
             var enemyInBL = false;
-            var enemyInBR = false;            
+            var enemyInBR = false;
             for (var i=0; i<obj.balloonOtherTanks.length; i++) {
                 var enemyY = obj.balloonOtherTanks[i].y;
                 var enemyX = obj.balloonOtherTanks[i].x;
@@ -378,11 +382,11 @@ Behavior.PositionBalloon.prototype = {
             var setLeft = function() {
                 obj.balloonLeft = -offset - balloonWidth;
                 obj.balloonRight = -offset;
-            }
+            };
             var setRight = function() {
                 obj.balloonLeft = offset;
                 obj.balloonRight = offset + balloonWidth;
-            }
+            };
             var setMiddle = function() {
                 if (tankX < obj.balloonMinX + 100 + balloonWidth / 2) {
                     obj.balloonLeft = obj.balloonMinX + 100 - tankX;
@@ -394,7 +398,7 @@ Behavior.PositionBalloon.prototype = {
                     obj.balloonLeft = -balloonWidth / 2;
                     obj.balloonRight = -obj.balloonLeft;
                 }
-            }
+            };
 
             // solve direction
             if (mustLeft) {
@@ -453,7 +457,7 @@ Behavior.PositionBalloon.prototype = {
                 }
             }
             // adjust diagonal positions
-            if (obj.balloonY != 0) {
+            if (obj.balloonY !== 0) {
                 if (obj.balloonLeft > 0) {
                     var multiplier = 45 / Math.sqrt(obj.balloonY*obj.balloonY + obj.balloonLeft*obj.balloonLeft);
                     obj.balloonY *= multiplier;
