@@ -122,16 +122,16 @@ var App = {
         ctx.restore();
     },
     DrawHealthCube: function(ctx, team) {
-        if(team.Tank)
-            ctx.drawImage(App.Images.hpLeaf, 8, 0, 16, 16);
-        var hp = 9;
         var tankHp = team.Tank ? team.Tank.hp : 0;
-        for(var y = 16; y < 64; y += 16)
-            for(var x = 0; x < 48; x += 16) {
-                var lit = tankHp >= hp;
-                ctx.drawImage(lit ? App.Images.hpCubeLit : App.Images.hpCubeDim, x, y, 16, 16);
-                hp--;
-            }
+        ctx.textBaseline = "middle";
+        ctx.textAlign = "center";
+        ctx.globalAlpha = 0.6;
+        ctx.font = "14px 'Russo One'";
+        ctx.fillText(Res.Lives, 18, 50);
+        ctx.globalAlpha = 1;
+        ctx.font = "18px 'Press Start 2P'"; 
+        ctx.translate(18, 32);
+        ctx.fillText(tankHp, 0, 0);
     },
     DrawJoinTicker: function(ctx, x, y) {
         ctx.font = "bold 14px Roboto";
