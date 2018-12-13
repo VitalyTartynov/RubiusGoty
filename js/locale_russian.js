@@ -3,7 +3,7 @@ var Res = {
     inviteLine3: "в браузере своего сотового!",
     volumeOff: "ВЫКЛ",
     Score: "PTS",
-    Lives: "LIVES",
+    Lives: "HLH",
     HiNameChooseYourTeam: "Привет, <b>{name}</b>!<br/>Выбирай свою команду:",//hi, name, choose your team - choose-team-page
     HiNameYouAreInTeamChooseYourRole: "Привет, <b>{name}</b>!<br/>Ты в команде <b>{team}</b>.<br/>Выбери свою роль:", //hi, name, you are in team, choose your role - choose-position-page
     back:"Назад", //back - change-name

@@ -127,7 +127,7 @@ var App = {
         ctx.textAlign = "center";
         ctx.globalAlpha = 0.6;
         ctx.font = "14px 'Russo One'";
-        ctx.fillText(Res.Lives, 18, 50);
+        ctx.fillText(Res.Lives, 19, 50);
         ctx.globalAlpha = 1;
         ctx.font = "18px 'Press Start 2P'"; 
         ctx.translate(18, 32);
