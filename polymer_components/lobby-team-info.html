@@ -1,22 +1,6 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <dom-module id="lobby-team-info">
     <template>
-        <!--
-        <div class="container row">
-            <template is="dom-repeat" items="{{model.teams}}" as="team" >
-                <div class="col s4 section">
-                    <h5>{{team.title}}</h5>
-                    <div class="collection">
-                        <template is="dom-repeat" items="{{team.members}}">
-                        <div class="collection-item">
-                            {{item.name}}
-                        </div>
-                    </template>
-                    </div>
-                </div>
-            </template>
-        </div>
--->
         <div class="container row">
             <template is="dom-repeat" items="{{model.teams}}" as="team" >
                 <div class="col s4 section">
@@ -27,7 +11,7 @@
                                 <button type='submit' class='col s12 btn btn-large waves-effect' style$="height: auto; line-height: 20px; padding: 15px 20px; {{position.color}}">
                                     {{position.title}}
                                     <template is="dom-if" if="{{position.taken}}">
-<br />
+                                        <br />
                                         <span style="font-size: 10px;">{{position.member.name}}</span>
                                     </template>
                                 </button>
@@ -64,8 +48,6 @@
         _teamName: function(teamNumber) { return Res.Teams[teamNumber - 1]; },
         ready: function () {
             this.model = Sockets.ViewModel;
-
-
             var that = this;
             Sockets.UpdateCallback = function () {
                 if (Sockets.ViewModel.teams) {
@@ -80,7 +62,6 @@
                             positions.push(position);
                             positionsDictionary[position.id] = position;
                         })
-
 
                         team.members.forEach(function (member) {
                             var position = positionsDictionary[member.position] || {};

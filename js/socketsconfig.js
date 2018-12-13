@@ -12,7 +12,6 @@ var _positions = [
     // },
     {
         title: Res.Roles.ShootRole,
-
         id: 'fire',
         actions: [
             {action:'fire', text: Res.Roles.Shoot, icon: 'button-fire.png'}
@@ -20,7 +19,6 @@ var _positions = [
     },
     {
         title: Res.Roles.TurretRole,
-
         id: 'turret',
         actions: [
             {action:'turretLeft', text: Res.Roles.TurretLeft, icon: 'button-turret-left.png'},
@@ -35,7 +33,6 @@ var _positions = [
             {action:'moveBackward', text: Res.Roles.Backward, icon: 'button-backward.png'}
         ]
     },
-
     {
         title: Res.Roles.TurnRole,
         id: 'turn1',

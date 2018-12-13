@@ -3,7 +3,7 @@
   "//2": "https://docs.npmjs.com/files/package.json",
   "//3": "updating this file will download and update your packages",
   "name": "rubius-goty",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Message server",
   "main": "server.js",
   "scripts": {

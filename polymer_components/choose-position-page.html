@@ -1,26 +1,19 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <dom-module id="choose-position-page">
     <template>
-
-
         <div class="section"></div>
         <main>
-
             <center>
                 <div inner-h-t-m-l="{{localize('HiNameYouAreInTeamChooseYourRole', 'name', name, 'team', teamName)}}"></div>
-
                 <br/>
                 <template is="dom-repeat" items="{{positions}}" as="position">
                     <div class='row'>
                         <button type='submit' class$='col s12 btn waves-effect {{position.color}}' disabled="{{position.taken}}" data-position$="{{position.id}}" on-tap="setPosition">{{position.title}}</button>
                     </div>
                 </template>
-
             </center>
-
             <div class="section"></div>
         </main>
-
         <change-name></change-name>
     </template>
 </dom-module>
@@ -32,9 +25,7 @@
             Polymer.AppLocalizeBehavior
         ],
         properties: {
-            language: {
-                value: 'en'
-            },
+            language: { value: 'en' },
             resources: {
                 value: function () {
                     return {
@@ -50,9 +41,7 @@
         _teamName: function(teamNumber) { return Res.Teams[teamNumber - 1]; },
         ready: function() {
             CheckClientNavigationShouldExit('choose-position');
-
             this.name = localStorage.getItem("username");
-
             _positions.forEach(function (position) {position.taken = true;});
             this.positions = _positions;
         },

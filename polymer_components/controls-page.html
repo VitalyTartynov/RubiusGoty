@@ -101,10 +101,6 @@
             };
             Sockets.UpdateCallback();
 
-            // if (typeof document.addEventListener !== "undefined" && typeof document[hiddenProp] !== "undefined") {
-            //     document.addEventListener(visibilityChange, unfocusListener, false);
-            // }
-
             unfocusListener = function () {
                 // if(document[hiddenProp])
                     that.actions.forEach(function (act) {
@@ -125,9 +121,6 @@
         },
         detached: function () {
             Sockets.Close();
-            // if (typeof document.addEventListener !== "undefined" && typeof document[hidden] !== "undefined") {
-            //     document.removeEventListener(visibilityChange, unfocusListener, false);
-            // }
             window.removeEventListener('blur', unfocusListener, false);
             clearInterval(pingInterval);
         },
