@@ -7,7 +7,7 @@ var server = require('http').createServer(),
 // Client stuff
 
 var iface = process ? process.env.IFACE : null;
-var port = 10110;
+var port = process ? process.env.PORT : null;
 if (!port)
    port = 80;
 console.log("Configured address: " + iface + ":" + port);
