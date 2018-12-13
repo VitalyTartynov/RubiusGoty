@@ -16,7 +16,6 @@
 </dom-module>
 
 <script>
-
     Polymer({
         is: 'server-info',
         behaviors: [
@@ -37,7 +36,6 @@
         _teamName: function(teamNumber) { return Res.Teams[teamNumber - 1]; },
         ready: function () {
             this.model = Sockets.ViewModel;
-
             var that = this;
             Sockets.UpdateCallback = function () {
                 that.set('model', Sockets.ViewModel);
@@ -56,6 +54,5 @@
                 state: 1,
             });
         },
-
     });
 </script>

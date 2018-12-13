@@ -7,9 +7,9 @@ function Map(){
     var terrain = 
     "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" +
     "Sffffffffff,c||||cBBB.......SfffffffS.......BBBc||||c,ffffffffffS" +
-    "Sffffffffff,c||||cBB.......,SfffffffS,.......BBc||||c,ffffffffffS" +
+    "Sffffffffff,c||||cBB.......,fffffffff,.......BBc||||c,ffffffffffS" +
     "Sffffffffff,c||||cB.......,;fffffffff;,.......Bc||||c,ffffffffffS" +
-    "Sffffffffff,c||||c......S.,;fffffffff;,.S......c||||c,ffffffffffS" +
+    "Sffffffffff,c||||c........,;fffffffff;,........c||||c,ffffffffffS" +
     "SffffBBBBBB.c||||.......S.,;fffffffff;,.S......c||||c.BBBBBBffffS" +
     "SffffBBBBBB.c|||........S..,SfffffffS,..S......c||||c.BBBBBBffffS" +
     "SffffffffBB.c|||....B...S..,SSSSSSSSS,..S...B..c||||c.BBffffffffS" +
@@ -37,16 +37,16 @@ function Map(){
     "S...........c|+++-------------------------------+++|c...........S" +
     "S............||++-----------------------.-------++||c...........S" +
     "S...,,,,.....||||cccccccccccccccccccccc...cccccc||||c....,,,,...S" +
-    "S.,;SSSSBBBB.||||cBBBBBBBBBBBB.ccc.BBBBBBBBBBBBc||||cBBBBSSSS;,.S" +
+    "S.,;;SSSBBBB.||||cBBBBBBBBBBBB.ccc.BBBBBBBBBBBBc||||cBBBBSSS;;,.S" +
     "S....,,,;;;Bc||||cBBBBBBBBBBBB.ccc.BBBBBBBBBBBBc||||cB;;;,,,....S" +
     "S......,,;;Bc||||cBB........BB.ccc.BB........BBc||||cB;;,,......S" +
     "S.......,,;Bc||||cBB........BB.ccc.BB........BBc||||cB;,,.......S" +
-    "SSSfffSS.,,Sc||||cBB...........ccc...........BBc||||cS,,.SSfffSSS" +
+    "SSffffSS.,,Sc||||cBB...........ccc...........BBc||||cS,,.SSffffSS" +
     "SffffffS..,Sc||||c.....,B,.....ccc.....,B,.....c||||cS,..SffffffS" +
     "Sfffffff..,Sc||||c.....BSB.....ccc.....BSB.....c||||cS,..fffffffS" +
-    "Sfffffff...Sc||||c.....,B,.....ccc.....,B,.....c||||cS...fffffffS" +
+    "Sfffffff....c||||c.....,B,.....ccc.....,B,.....c||||c....fffffffS" +
     "Sfffffff....c||||cBB.........BBBBBBB.........BBc||||c....fffffffS" +
-    "SffffffS....c||||cBB........BBBBBBBBB........BBc||||.....SffffffS" +
+    "Sfffffff....c||||cBB........BBBBBBBBB........BBc||||.....fffffffS" +
     "SffffffS....c||||cBB.......BBBBBBBBBBB.......BBc|||......SffffffS" +
     "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSfffffSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" +
     "SSSSSSSSSSSSSSSSSSSSSSSSSSSSSSfffffSSSSSSSSSSSSSSSSSSSSSSSSSSSSSS" +
@@ -83,12 +83,12 @@ function Map(){
     "                                                                 "  +
     "                                                                 "  +
     "                               xxxx                              "  +
-    "                xx                             xx                "  +
+    "                                                                 "  +
     "                                                                 "  +
     "                                                                 "  +
     "                        x               x                        "  +
     "                        x               xx                       "  +
-    "            xx                                     xx            "  +
+    "                                                                 "  +
     "                                                                 "  +
     "                                H                                "  +
     "                                                                 "  +

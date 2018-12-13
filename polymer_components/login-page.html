@@ -1,39 +1,28 @@
 <link rel="import" href="../bower_components/polymer/polymer.html">
 <dom-module id="login-page">
     <template>
-
-
         <div class="section"></div>
         <main>
-
             <center>
-
-
-                        <div class='row'>
-                                <div class='input-field col s12'>
-                                    <input autofocus="autofocus" class='validate' type='email' name='email' id='email'  value="{{name::change}}"/>
-                                    <label for='email'>{{localize('EnterYourName')}}</label>
-                                </div>
-                        </div>
-
+                <div class='row'>
+                    <div class='input-field col s12'>
+                        <input autofocus="autofocus" class='validate' type='email' name='email' id='email'  value="{{name::change}}"/>
+                        <label for='email'>{{localize('EnterYourName')}}</label>
+                    </div>
+                </div>
                 <center>
                     <div class='row'>
                         <button type='submit' name='btn_login' class='col s12 btn btn-large waves-effect indigo' on-tap="enter">{{localize('Enter')}}</button>
                     </div>
                 </center>
             </center>
-
-
-
             <div class="section"></div>
             <div class="section"></div>
         </main>
-
     </template>
 </dom-module>
 
 <script>
-
     var adjectives = Res.generatedNamesAdjectives;
     var nouns = Res.generatedNamesNouns;
 
@@ -64,11 +53,8 @@
                 return;
 
             this.name = randomEl(adjectives) + ' ' + randomEl(nouns);
-            
         },
-        attached: function() {
-            
-        },
+        attached: function() { },
         enter: function() {
             if (!this.name)
                 return;
@@ -76,6 +62,5 @@
             localStorage.setItem('username', this.name);
             GoToChooseTeam();
         },
-
     });
 </script>
