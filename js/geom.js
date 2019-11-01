@@ -1,9 +1,9 @@
-var Geom = {}
+var Geom = {};
 
 Geom.Point = function (x, y) {
     this.x = x;
     this.y = y;
-}
+};
 
 Geom.Point.prototype.Rotate = function (angle) {
     var cosa = Math.cos(angle);
@@ -11,18 +11,18 @@ Geom.Point.prototype.Rotate = function (angle) {
     return new Geom.Point(
         this.x * cosa - this.y * sina,
         this.x * sina + this.y * cosa);
-}
+};
 
 Geom.Point.prototype.Translate = function (x, y) {
     return new Geom.Point(this.x + x, this.y + y);
-}
+};
 
 Geom.Mbr = function (xmin, xmax, ymin, ymax) {
     this.xmin = xmin;
     this.xmax = xmax;
     this.ymin = ymin;
     this.ymax = ymax;
-}
+};
 
 Geom.Rect = function (x, y, width, height, angle) {
     this.x = x;
@@ -30,7 +30,7 @@ Geom.Rect = function (x, y, width, height, angle) {
     this.width = width;
     this.height = height;
     this.angle = angle;
-}
+};
 
 Geom.Rect.prototype.Rotate = function (angle) {
     var cosa = Math.cos(angle);
@@ -43,11 +43,11 @@ Geom.Rect.prototype.Rotate = function (angle) {
         this.angle + angle
     );
     return newrect;
-}
+};
 
 Geom.Rect.prototype.Translate = function (x, y) {
     return new Geom.Rect(this.x + x, this.y + y, this.width, this.height, this.angle);
-}
+};
 
 Geom.Rect.prototype.GetMbr = function () {
     var w = this.width;
@@ -82,7 +82,7 @@ Geom.Rect.prototype.GetMbr = function () {
     if (p.y < ymin) ymin = p.y;
 
     return new Geom.Mbr(xmin, xmax, ymin, ymax);
-}
+};
 
 Geom.OverlapMbr = function (r1, r2) {
     var rotrect = r2.Translate(-r1.x, -r1.y).Rotate(-r1.angle); //in this coords r1 is in the origin and along axis
@@ -95,14 +95,14 @@ Geom.OverlapMbr = function (r1, r2) {
 
     // if r2 projection on r1 edges overlaps the edges
     return (mbr.xmax > xmin) && (mbr.xmin < xmax) && (mbr.ymax > ymin) && (mbr.ymin < ymax);
-}
+};
 
 Geom.Intersect = function (rect1, rect2) {
     if (!Geom.OverlapMbr(rect1, rect2)) return false;
     if (!Geom.OverlapMbr(rect2, rect1)) return false;
 
     return true;
-}
+};
 
 Geom.FindPointsInRect = function (r1, r2) {
     var rotrect = r2.Translate(-r1.x, -r1.y).Rotate(-r1.angle);
@@ -136,7 +136,7 @@ Geom.FindPointsInRect = function (r1, r2) {
     p = (new Geom.Point(-w / 2, -h / 2)).Rotate(rotrect.angle).Translate(rotrect.x, rotrect.y);
     testFunc(p, retval);
     return retval;
-}
+};
 // var dbg;
 // var printRect = function(r) {
 //     return "R: x" + r.x.toFixed(0) + " y" + r.y.toFixed(0) + " a" + r.angle.toFixed(2) + " w" + r.width + " h" + r.height;
@@ -150,4 +150,4 @@ Geom.Intersect2 = function (rect1, rect2) {
         return false;
     // l("debugText").innerHTML = dbg;
     return arr;
-}
+};

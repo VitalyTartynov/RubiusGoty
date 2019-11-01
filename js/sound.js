@@ -4,9 +4,7 @@ var Sound = {
     Cache: [],
 
     GetKey: function (url, id) {
-        if (id)
-            return url + "(" + id + ")";
-        return url;
+        return id ? url + "(" + id + ")" : url;
     },
 
     PutAudio: function (key, audio) {
@@ -64,8 +62,8 @@ var Sound = {
 
 var volumeToFraction = function (intVolume) {
     return Math.pow(intVolume / 100, 2);
-}
+};
 
 var volumeToInteger = function (fracVolume) {
     return Math.sqrt(fracVolume) * 100;
-}
+};

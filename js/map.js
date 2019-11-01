@@ -1,4 +1,3 @@
-
 function Map(){
 
     this.width = 65;
@@ -106,7 +105,7 @@ function Map(){
     "                                                                 "  +
     "                                                                 ";
 
-    if(terrain.length != this.width * this.height)
+    if (terrain.length !== this.width * this.height)
         throw "Cannot load map from string!";
 
     this.terrainArray = Array.from(terrain);
@@ -131,7 +130,7 @@ function Map(){
 
     for(var i=0; i<this.buildingArray.length; i++) {
         var char = this.buildingArray[i];
-        if(char == ' ')
+        if(char === ' ')
             continue;
         if(char in this.tileDictionary)
             continue;
@@ -181,7 +180,7 @@ Map.prototype = {
                 building: bchar,
                 tractionFactor: this.tileDictionary[tchar].traction,
                 speed: this.tileDictionary[tchar].speed,
-                passable: this.impassableTiles.indexOf(tchar) < 0 && bchar == ' ',
+                passable: this.impassableTiles.indexOf(tchar) < 0 && bchar === ' '
             };
     },
 
@@ -197,7 +196,7 @@ Map.prototype = {
         if( xcell >= 0 && xcell < this.width && ycell >= 0 && ycell < this.height ) {
             var char = this.getTerrainChar(xcell, ycell);
             var idx = this.degradation.indexOf(char);
-            if( idx > -1 && idx + 1 < this.degradation.length && this.degradation.charAt(idx + 1) != ' ')
+            if( idx > -1 && idx + 1 < this.degradation.length && this.degradation.charAt(idx + 1) !== ' ')
                 this.setTerrainChar(xcell, ycell, this.degradation.charAt(idx + 1));
         }
     },
@@ -215,7 +214,7 @@ Map.prototype = {
             for(var cy = 0; cy < this.height; cy ++) {
                 var char = this.getTerrainChar(cx, cy);
                 this.drawTile(ctx, cx, cy, char);
-                if(char != 'B' && char != 'S' && cy > 0 && cx > 0 && cy < 43 && cx < 64) {
+                if(char !== 'B' && char !== 'S' && cy > 0 && cx > 0 && cy < 43 && cx < 64) {
                     var dx = 0;
                     var dy = 0;
                     var dxs = 0;
@@ -224,15 +223,15 @@ Map.prototype = {
                     var tright = this.getTerrainChar(cx+1,cy);
                     var ttop = this.getTerrainChar(cx,cy-1);
                     var tbottom = this.getTerrainChar(cx,cy+1);
-                    if(tleft == 'B' || tleft == 'S')  {dx += 2; }
-                    if(tright == 'B' || tright == 'S')  dx += 1;
-                    if(ttop == 'B' || ttop == 'S')  dy += 2;
-                    if (tbottom == 'B' || tbottom == 'S') dy += 1;
-                    if (char != '.' && char != ',' && char != ';'){
-                        if (tleft == '.' || tleft == ',' || tleft == ';') dxs += 2;
-                        if (tright == '.' || tright == ',' || tright == ';') dxs += 1;
-                        if (ttop == '.' || ttop == ',' || ttop == ';') dys += 2;
-                        if (tbottom == '.' || tbottom == ',' || tbottom == ';') dys += 1;
+                    if(tleft === 'B' || tleft === 'S')  {dx += 2; }
+                    if(tright === 'B' || tright === 'S')  dx += 1;
+                    if(ttop === 'B' || ttop === 'S')  dy += 2;
+                    if (tbottom === 'B' || tbottom === 'S') dy += 1;
+                    if (char !== '.' && char !== ',' && char !== ';'){
+                        if (tleft === '.' || tleft === ',' || tleft === ';') dxs += 2;
+                        if (tright === '.' || tright === ',' || tright === ';') dxs += 1;
+                        if (ttop === '.' || ttop === ',' || ttop === ';') dys += 2;
+                        if (tbottom === '.' || tbottom === ',' || tbottom === ';') dys += 1;
                     }
                     if(dxs || dys)
                         ctx.drawImage(this.tilesImage, (8+dxs) * this.tileArtWidth, (0+dys) * this.tileArtHeight, this.tileArtWidth, this.tileArtHeight,
@@ -243,7 +242,7 @@ Map.prototype = {
 
                 }
                 var bchar = this.getBuildingChar(cx, cy);
-                if( bchar != ' ')
+                if( bchar !== ' ')
                     this.drawTile(ctx, cx, cy, bchar);
             }
         ctx.restore();
@@ -260,8 +259,8 @@ Map.prototype = {
             x * this.tileWidth, y * this.tileHeight, this.tileWidth, this.tileHeight);
     },
     
-    powerupPoints: {},
-}
+    powerupPoints: {}
+};
 
 function PowerupPoint(x, y) {
     this.x = x;

@@ -68,7 +68,7 @@ var _positions = [
 
 var _socket;
 
-if (webSocketUrl != "ws://") { // opened from disk?
+if (webSocketUrl !== "ws://") { // opened from disk?
     _socket = new ReconnectingWebSocket(webSocketUrl);
 
     _socket.sendJson = function (message, callback) {

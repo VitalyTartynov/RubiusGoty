@@ -74,7 +74,7 @@ var App = {
             ctx.save();
 
             ctx.translate(guiSpec.x + 10.5, guiSpec.y + 10.5);
-            if (value == 1) {
+            if (value === 1) {
                 ctx.fillStyle = "#FFFFA0";
                 ctx.fillRect(-10.5, -10.5, 21, 21);
             } else if (value < 0) {
@@ -188,7 +188,7 @@ var App = {
 
         var onloaded = function () {
             App.assetsLoaded++;
-            if (App.assetsLoaded == assetCount)
+            if (App.assetsLoaded === assetCount)
                 App.FinishEntry();
         };
         var loadImage = function (url) {
@@ -209,22 +209,22 @@ var App = {
 
         Game.Map.tilesImage = loadImage("./images/tiles-winter.png");
 
-        App.Images.tankHead = loadImage("./images/tank-head.png")
-        App.Images.tankTrack = loadImage("./images/tank-track.png")
-        App.Images.tankTrackSmall = loadImage("./images/tank-track-small.png")
-        App.Images.tankBody = loadImage("./images/tank-body.png")
-        App.Images.tankBodySmall1 = loadImage("./images/tank-body-small-1.png")
-        App.Images.tankBodySmall2 = loadImage("./images/tank-body-small-2.png")
-        App.Images.tankBodySmall3 = loadImage("./images/tank-body-small-3.png")
-        App.Images.tankTurret = loadImage("./images/tank-turret.png")
-        App.Images.tankTurretSmall = loadImage("./images/tank-turret-small.png")
-        App.Images.explosion = loadImage("./images/explosion.png")
-        App.Images.flash = loadImage("./images/flash.png")
-        App.Images.tankFire = loadImage("./images/tank-fire.png")
-        App.Images.tankFireBig = loadImage("./images/big-tank-fire.png")
-        App.Images.bonusHp = loadImage("./images/bonus-hp.png")
-        App.Images.heal = loadImage("./images/heal.png")
-        App.Images.bonusDamage = loadImage("./images/bonus-damage.png")
+        App.Images.tankHead = loadImage("./images/tank-head.png");
+        App.Images.tankTrack = loadImage("./images/tank-track.png");
+        App.Images.tankTrackSmall = loadImage("./images/tank-track-small.png");
+        App.Images.tankBody = loadImage("./images/tank-body.png");
+        App.Images.tankBodySmall1 = loadImage("./images/tank-body-small-1.png");
+        App.Images.tankBodySmall2 = loadImage("./images/tank-body-small-2.png");
+        App.Images.tankBodySmall3 = loadImage("./images/tank-body-small-3.png");
+        App.Images.tankTurret = loadImage("./images/tank-turret.png");
+        App.Images.tankTurretSmall = loadImage("./images/tank-turret-small.png");
+        App.Images.explosion = loadImage("./images/explosion.png");
+        App.Images.flash = loadImage("./images/flash.png");
+        App.Images.tankFire = loadImage("./images/tank-fire.png");
+        App.Images.tankFireBig = loadImage("./images/big-tank-fire.png");
+        App.Images.bonusHp = loadImage("./images/bonus-hp.png");
+        App.Images.heal = loadImage("./images/heal.png");
+        App.Images.bonusDamage = loadImage("./images/bonus-damage.png");
 
         // for input definitions, see Game.SetupTeam()
         this.GuiPositions = [{
@@ -312,19 +312,19 @@ var App = {
         App.SetVolumeText(60);
 
         document.onkeypress = function (e) {
-            if (e.key == '-') {
+            if (e.key === '-') {
                 var vol = volumeToInteger(Game.Music.volume);
                 if (vol > 0) {
                     vol -= 10;
                     vol = Math.max(vol, 0);
                     Game.Music.volume = volumeToFraction(vol);
-                    if (vol == 0 && !Game.Music.paused) {
+                    if (vol === 0 && !Game.Music.paused) {
                         Game.Music.pause();
                         Game.Music.currentTime = 0;
                     }
                     App.SetVolumeText(vol);
                 }
-            } else if (e.key == '=') {
+            } else if (e.key === '=') {
                 var vol = volumeToInteger(Game.Music.volume);
                 if (vol < 100) {
                     vol += 10;
@@ -336,7 +336,7 @@ var App = {
                     App.SetVolumeText(vol);
                 }
             }
-        }
+        };
 
         // no address here, it is drawn in DrawJoinTicker
         document.getElementById("hud4message").innerHTML = Res.inviteLine1 + "<br/><br/>" + Res.inviteLine3;
@@ -349,7 +349,7 @@ var App = {
     },
 
     SetVolumeText: function (intVolume) {
-        var str = intVolume == 0 ?
+        var str = intVolume === 0 ?
             Res.volumeOff :
             intVolume < 100 ?
             "&nbsp;" + intVolume.toString() + "%" :
@@ -363,7 +363,7 @@ var documentReadyInterval = setInterval(function () {
         App.EntryPoint();
         clearInterval(documentReadyInterval);
         window.onresize = function () {
-            if (App.Canvas != undefined) {
+            if (App.Canvas !== undefined) {
                 // App.Canvas.width = window.innerWidth;
                 // App.Canvas.height = window.innerHeight;
             }

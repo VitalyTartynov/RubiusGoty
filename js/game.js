@@ -27,7 +27,7 @@ var Game = {
                 Game.RootEntity.addChild(this.Tank);
             }
         };
-        if (name == "boss") {
+        if (name === "boss") {
             team.Inputs.ThrottleInput = new KeyboardBiDiInput(App.Keyboard, 'W', 'S');
             team.Inputs.TankTurnInput = new KeyboardBiDiInput(App.Keyboard, 'D', 'A');
             team.Inputs.TurretTurnInput = new KeyboardBiDiInput(App.Keyboard, 'L', 'J');
@@ -53,7 +53,7 @@ var Game = {
     },
     spawnTank: function (x, y, angle, type, networkTeamId) {
         var tank;
-        if (type == "boss")
+        if (type === "boss")
             tank = new ObjectGroup(x, y, angle, [new Behavior.MoveTank], [
                 new ObjectGroup(0, 22, 0, [new Behavior.Move], [
                     new Sprite(0, 7, 180, 26, 26, App.Images.tankHead)
@@ -75,7 +75,7 @@ var Game = {
                     new Sprite(0, 7, 180, 18, 38, App.Images.tankTurretSmall)
                 ])
             ]);
-        tank.boss = type == "boss";
+        tank.boss = type === "boss";
         if (tank.boss) tank.hidden = true;
         var offset = tank.boss ? 1 : 0;
         tank.hp = 9;
@@ -102,7 +102,7 @@ var Game = {
         tank.started = false;
 
         tank.setMovementSound = function (throttle) {
-            if (this.speed == 0 && !this.started) return;
+            if (this.speed === 0 && !this.started) return;
 
             this.started = true;
 
@@ -152,7 +152,7 @@ var Game = {
 
             this.sparksCooldown -= 10;
             i++;
-            if (i == points.length)
+            if (i === points.length)
                 i = 0;
         }
     },
@@ -178,16 +178,16 @@ var Game = {
         var sprite;
         var angle;
         var offset = 0.5;
-        if (key == 'h') {
+        if (key === 'h') {
             key = 'hp',
                 sprite = App.Images.bonusHp;
             angle = 0;
             offset = 0;
-        } else if (key == 'D') {
+        } else if (key === 'D') {
             key = 'damage';
             sprite = App.Images.bonusDamage;
             angle = 0;
-        } else if (key == 'H') {
+        } else if (key === 'H') {
             key = 'speed';
             sprite = App.Images.arrowChevron;
             angle = 90;
@@ -211,7 +211,7 @@ var Game = {
             obj.addChild(flash);
 
             Sound.Play("./sound/bonus.ogg", 100);
-            if (obj.class == "tank") {
+            if (obj.class === "tank") {
                 if (this.effectType === "hp") {
                     obj.hp = Math.min(obj.hp + 2, 9);
                 } else if (this.effectType === "damage") {
@@ -263,8 +263,8 @@ var Game = {
         };
         var ourTeam = team;
         bullet.OnObjectCollision = function (obj) {
-            Game.spawnExplosion(this.x, this.y, 12 + damage * 12, obj.class == "tank" ? "tank" : null);
-            if (obj.class == "tank") {
+            Game.spawnExplosion(this.x, this.y, 12 + damage * 12, obj.class === "tank" ? "tank" : null);
+            if (obj.class === "tank") {
                 var tank = obj;
                 tank.hp = Math.max(0, tank.hp - damage);
                 if (tank.hp <= 0 && tank.Barrel) {
@@ -276,7 +276,7 @@ var Game = {
                     tank.Barrel = null;
                     for (var i in Game.Teams) {
                         var team = Game.Teams[i];
-                        if (tank == team.Tank) {
+                        if (tank === team.Tank) {
                             team.Tank = null;
                             team.tanksSpawnsIn = 2500;
                         }
@@ -288,7 +288,7 @@ var Game = {
                 tank.RightTrack.animDelay = 0;
             }
             this.dead = true;
-        }
+        };
 
         this.RootEntity.changeCoordinatesFromDescendant(bullet, tank.Barrel);
         this.RootEntity.addChild(bullet);
@@ -305,9 +305,9 @@ var Game = {
         var blast = new Sprite(x, y, Math.random() * 90, size, size, App.Images.explosion, [new Behavior.Animate(18, 8, 50), new Behavior.TimedLife(399)]);
         Game.RootEntity.addChild(blast);
 
-        if (type == "echo") {
+        if (type === "echo") {
             Sound.Play("./sound/longblast.mp3", 100);
-        } else if (type == "tank") {
+        } else if (type === "tank") {
             Sound.Play("./sound/tank-fire.wav", 100);
         } else {
             if (Math.random() < 0.5)
@@ -327,7 +327,7 @@ var Game = {
     showBalloonMessage: function (tank, message) {
         var tanks = [];
         this.Teams.forEach(function (team) {
-            if (team.Tank && team.Tank != tank)
+            if (team.Tank && team.Tank !== tank)
                 tanks.push(team.Tank);
         });
         var newBalloon = new Balloon(message, [
@@ -338,7 +338,7 @@ var Game = {
         // soft-kill the previous balloon for same tank
         for (var i = 0; i < this.GuiEntity.items.length; i++) {
             var oldBalloon = this.GuiEntity.items[i];
-            if (oldBalloon.balloonTank == tank)
+            if (oldBalloon.balloonTank === tank)
                 oldBalloon.lifeTimeout = oldBalloon.lifeDieTimeout || 0;
         }
         this.GuiEntity.addChild(newBalloon);
@@ -369,20 +369,20 @@ var Game = {
             }
 
             // torques are stored in wrong tracks
-            tank.LeftTrack.animDelay = tank.RightTrack.torque == 0 ? 0 : 100;
-            tank.RightTrack.animDelay = tank.LeftTrack.torque == 0 ? 0 : 100;
+            tank.LeftTrack.animDelay = tank.RightTrack.torque === 0 ? 0 : 100;
+            tank.RightTrack.animDelay = tank.LeftTrack.torque === 0 ? 0 : 100;
 
             tank.Barrel.moveAngSpeed = turnSpeed * 0.75 * team.Inputs.TurretTurnInput.read(timestamp);
             var fireState = team.Inputs.FireInput.read(timestamp);
-            if (fireState == 1)
+            if (fireState === 1)
                 tank.Barrel.firing = true;
             if (!tank.boss)
                 tank.Barrel.recoil = Math.min(fireState, 0);
 
             var phrases = null;
-            if (team.Inputs.ManagerGood && (team.Inputs.ManagerGood.read(timestamp) == 1)) {
+            if (team.Inputs.ManagerGood && (team.Inputs.ManagerGood.read(timestamp) === 1)) {
                 phrases = Res.ManagerGoodPhrases;
-            } else if (team.Inputs.ManagerBad && (team.Inputs.ManagerBad.read(timestamp) == 1)) {
+            } else if (team.Inputs.ManagerBad && (team.Inputs.ManagerBad.read(timestamp) === 1)) {
                 phrases = Res.ManagerBadPhrases;
             }
             if (phrases) {
@@ -397,7 +397,7 @@ var Game = {
         if (this.sparksCooldown < 100) {
             this.sparksCooldown += delta;
             if (this.sparksCooldown > 100)
-                this.sparksCooldown == 100;
+                this.sparksCooldown === 100;
         }
 
         this.Teams.forEach(function (team) {
@@ -416,7 +416,7 @@ var Game = {
                     team.tanksSpawnsIn -= delta;
                     if (team.tanksSpawnsIn <= 0) {
                         team.SpawnTank();
-                        if (team.name != "boss")
+                        if (team.name !== "boss")
                             this.spawnFlash(team.spawnX, team.spawnY, 80);
                         if (!team.poppedOnStart) {
                             team.popKills = true;
@@ -479,5 +479,5 @@ var Game = {
 
         this.RootEntity.update(delta);
         this.GuiEntity.update(delta);
-    },
-}
+    }
+};

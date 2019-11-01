@@ -76,7 +76,7 @@ var EntityBase = {
     changeCoordinatesFromDescendant: function (obj, descendantParent) {
         var currentParent = descendantParent,
             lastX, lastY, lastA;
-        while (currentParent != this) {
+        while (currentParent !== this) {
             lastX = obj.x,
                 lastY = obj.y,
                 lastA = obj.angle;
@@ -194,7 +194,7 @@ Balloon.prototype = {
 
             var drawFunc = function () {
                 ctx.globalAlpha = deathPhase;
-                if (deathPhase == 1) {
+                if (deathPhase === 1) {
                     ctx.save();
                     ctx.translate(originX, balloonY);
                     ctx.rotate(calloutAngle);

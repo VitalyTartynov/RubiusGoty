@@ -13,7 +13,7 @@ function GoToChooseTeam() {
 }
 
 function CheckClientNavigationShouldExit(page) {
-    if (page == 'login-page') {
+    if (page === 'login-page') {
         if (localStorage.getItem('username')) {
             GoToChooseTeam();
             return true;
@@ -31,17 +31,17 @@ function CheckClientNavigationShouldExit(page) {
 var Sockets = (function () {
     _socket.onopen = function () {
         _socket.sendJson(ClientViewModel);
-    }
+    };
 
     _socket.onmessage = function (msg) {
         var data = JSON.parse(msg.data);
 
-        if (data.type == 'ViewModel') {
+        if (data.type === 'ViewModel') {
             Sockets.ViewModel = data;
             if (Sockets.UpdateCallback) {
                 Sockets.UpdateCallback();
             }
-        } else if (data.type == 'kick') {
+        } else if (data.type === 'kick') {
             Sockets.Close();
             GoTo('/');
         }

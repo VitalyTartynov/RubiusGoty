@@ -19,9 +19,9 @@ NetworkCooldownInputKeyboardStub.prototype = {
             if (!state)
                 return;
 
-            if (member.position == that.position)
+            if (member.position === that.position)
                 that.vacant = false;
-            if (state[that.property] == 1)
+            if (state[that.property] === 1)
                 flag1 = 1;
         });
 
@@ -56,25 +56,25 @@ NetworkBiDiInput.prototype = {
             if (!state)
                 return;
 
-            if (member.position == that.positionForward)
+            if (member.position === that.positionForward)
                 that.vacantForward = false;
-            if (state[that.propertyForward] == 1)
+            if (state[that.propertyForward] === 1)
                 that.valueForward = 1;
 
-            if (member.position == that.positionBackward)
+            if (member.position === that.positionBackward)
                 that.vacantBackward = false;
-            if (state[that.propertyBackward] == 1)
+            if (state[that.propertyBackward] === 1)
                 that.valueBackward = 1;
         });
 
-        if (this.valueForward == this.valueBackward)
+        if (this.valueForward === this.valueBackward)
             return 0;
         if (this.valueForward)
             return 1;
         if (this.valueBackward)
             return -1;
     }
-}
+};
 
 var Sockets = (function () {
     if (_socket) {
@@ -82,13 +82,13 @@ var Sockets = (function () {
             _socket.sendJson({
                 isAdmin: true,
             });
-        }
+        };
 
         _socket.onmessage = function (msg) {
             var data = JSON.parse(msg.data);
             console.log('got msg ' + msg.data);
 
-            if (data.type == 'ViewModel') {
+            if (data.type === 'ViewModel') {
                 Sockets.ViewModel = data;
                 if (Sockets.UpdateCallback) {
                     Sockets.UpdateCallback();
@@ -100,7 +100,7 @@ var Sockets = (function () {
 
     return {
         ViewModel: {
-            teams: [],
+            teams: []
         },
         UpdateCallback: null
     };

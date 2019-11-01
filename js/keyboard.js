@@ -8,14 +8,14 @@ KeyboardBiDiInput.prototype = {
     read: function () {
         this.valueForward = this.kybd.isDown(this.char1);
         this.valueBackward = this.kybd.isDown(this.char2);
-        if (this.valueForward == this.valueBackward)
+        if (this.valueForward === this.valueBackward)
             return 0;
         if (this.valueForward)
             return 1;
         if (this.valueBackward)
             return -1;
     }
-}
+};
 
 function KeyboardCooldownInput(kybd, char, cooldown, manualRefire) {
     this.kybd = kybd;
@@ -52,7 +52,7 @@ KeyboardCooldownInput.prototype = {
         this.vacant = this.kybd.vacant; // real keyboard does not have it, but network stubs do
         return this.value;
     }
-}
+};
 
 function Keyboard() {
     this._keysDown = {};
@@ -78,5 +78,5 @@ Keyboard.prototype = {
     keyUp: function (e) {
         var char = String.fromCharCode(e.keyCode);
         delete this._keysDown[char];
-    },
+    }
 };
