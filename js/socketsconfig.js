@@ -1,4 +1,4 @@
-var webSocketUrl = "ws://" + location.host;
+var webSocketUrl = "wss://" + location.host;
 var urlToJoinGame = 'http://' + location.host;
 
 var _positions = [
